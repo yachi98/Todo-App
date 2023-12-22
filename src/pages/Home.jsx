@@ -13,7 +13,7 @@ const Home = () => {
   const divRef = useRef(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isPowerMode, setIsPowerMode] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("green"); // test
+  const [backgroundColor, setBackgroundColor] = useState("black");
 
   // const displayTask = tasks.find((element) => !element.isCompleted);
 
