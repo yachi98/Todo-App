@@ -6,14 +6,14 @@ const SideBar = () => {
 
   return (
     <div
-      style={{
-        width: "20%",
-        minWidth: "300px",
-        height: "100vh",
-        background: "black",
-        backdropFilter: "blur(10px)",
-        position: "relative",
-      }}
+      className="w-1/5 bg-red-600 h-[100vh]"
+      // style={{
+      //   width: "20%",
+      //   // minWidth: "300px",
+      //   height: "100vh",
+      //   background: "black",
+      //   backdropFilter: "blur(10px)",
+      // }}
     >
       <h1
         style={{

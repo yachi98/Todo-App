@@ -59,10 +59,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex">
-      <div>
+    <div className="w-full pl-5">
+      <div className="flex">
         <input
-          className="p-2.5 min-w-96 m-5 rounded-lg text-sm outline-none"
+          className="px-8 min-w-96 my-5 rounded-lg text-sm outline-none"
           // style={{
           //   padding: "10px",
           //   margin: "20px",
@@ -84,8 +84,7 @@ const Home = () => {
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />
-      </div>
-      <div>
+
         <div style={{ display: "flex" }}>
           <Link
             to="/task/add"
@@ -119,7 +118,7 @@ const Home = () => {
           >
             Power Mode
           </button>
-          <div>
+          <div className="relative">
             <button
               onClick={handleClick}
               style={{
@@ -137,6 +136,7 @@ const Home = () => {
             >
               Sort
             </button>
+
             {showFilters && (
               <motion.div
                 ref={divRef}
@@ -149,7 +149,7 @@ const Home = () => {
                   height: "270px",
                   borderRadius: "15px",
                   position: "absolute",
-                  marginRight: "335px",
+                  // marginRight: "335px",
                   top: "75px",
                   zIndex: 999,
                   display: "flex",
@@ -185,98 +185,66 @@ const Home = () => {
             )}
           </div>
         </div>
+      </div>
 
-        <h1
-          style={{
-            color: "white",
-            fontWeight: 300,
-            marginLeft: "-470px",
-            marginTop: "70px",
-            fontSize: "30px",
-            display: "inline-block",
-          }}
-        >
-          All Tasks
-        </h1>
-        <ul
-          style={{
-            listStyle: "none",
-            padding: "20px",
-            minWidth: "360px",
-            marginLeft: "-500px",
-            marginTop: "30px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "15px",
-          }}
-        >
-          {/* {isPowerMode &&  */}
-          {tasks.map((task) => (
-            <motion.li
-              initial={{ y: 35 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.3 }}
-              key={task.id}
-              style={{
-                padding: "15px",
-                borderRadius: "15px",
-                background: task.completed ? "#39c6b3" : "rgb(1,1,1,0.5)",
-                backdropFilter: " blur(10px)",
-                height: "190px",
-                width: "400px",
-                display: "flex",
-                zIndex: 1,
-                flexDirection: "column",
-                gap: "10px",
-                transition: "all 0.2s ease-out",
-              }}
-            >
-              {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
-              <div>
-                <Link
-                  to={`/task/${task.id}`}
-                  style={{ textDecoration: "none" }}
+      <h1
+        style={{
+          color: "white",
+          fontWeight: 300,
+          marginTop: "150px",
+          fontSize: "30px",
+          display: "inline-block",
+        }}
+      >
+        All Tasks
+      </h1>
+
+      <ul
+        style={{
+          listStyle: "none",
+          minWidth: "360px",
+          marginTop: "30px",
+          display: "flex",
+          flexWrap: "wrap",
+
+          gap: "10px",
+        }}
+      >
+        {/* {isPowerMode &&  */}
+        {tasks.map((task) => (
+          <motion.li
+            initial={{ y: 35 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.3 }}
+            key={task.id}
+            style={{
+              padding: "15px",
+              borderRadius: "15px",
+              background: task.completed ? "#39c6b3" : "rgb(1,1,1,0.5)",
+              backdropFilter: " blur(10px)",
+              height: "190px",
+              width: "400px",
+              display: "flex",
+              zIndex: 1,
+              flexDirection: "column",
+              gap: "10px",
+              transition: "all 0.2s ease-out",
+            }}
+          >
+            {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
+            <div className="flex justify-between items-center">
+              <Link to={`/task/${task.id}`} style={{ textDecoration: "none" }}>
+                <strong
+                  style={{
+                    fontWeight: task.completed ? 400 : 300,
+                    color: task.completed ? "#000517" : "#E1E1E1",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                  }}
                 >
-                  <strong
-                    style={{
-                      fontWeight: task.completed ? 400 : 300,
-                      color: task.completed ? "#000517" : "#E1E1E1",
-                      fontSize: "20px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {task.value}
-                  </strong>
-                </Link>
-              </div>
-
-              <div
-                style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
-                  fontWeight: 400,
-                }}
-              >
-                Priority: {task.priority}
-              </div>
-              <div
-                style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
-                  fontWeight: 400,
-                }}
-              >
-                Complexity: {task.complexity}
-              </div>
-
-              <div
-                style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
-                  fontWeight: task.completed ? 400 : 300,
-                  fontSize: "15px",
-                }}
-              >
-                Due date: {task.dueDate}
-              </div>
-
+                  {task.value}
+                </strong>
+              </Link>
               <div
                 style={{
                   display: "flex",
@@ -355,10 +323,37 @@ const Home = () => {
                   />
                 </svg>
               </div>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
+            </div>
+
+            <div
+              style={{
+                color: task.completed ? "#000517" : "#E1E1E1",
+                fontWeight: 400,
+              }}
+            >
+              Priority: {task.priority}
+            </div>
+            <div
+              style={{
+                color: task.completed ? "#000517" : "#E1E1E1",
+                fontWeight: 400,
+              }}
+            >
+              Complexity: {task.complexity}
+            </div>
+
+            <div
+              style={{
+                color: task.completed ? "#000517" : "#E1E1E1",
+                fontWeight: task.completed ? 400 : 300,
+                fontSize: "15px",
+              }}
+            >
+              Due date: {task.date}
+            </div>
+          </motion.li>
+        ))}
+      </ul>
     </div>
   );
 };

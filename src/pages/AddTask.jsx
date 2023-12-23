@@ -11,12 +11,13 @@ const AddTask = () => {
   const [value, setValue] = useState("");
   const [complexity, setComplexity] = useState(null);
   const [priority, setPriority] = useState(null);
-  const [dueDate, setDueDate] = useState(useTodo ? useTodo.date : "");
+  const [dueDate, setDueDate] = useState(Date || null);
   const navigate = useNavigate();
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const myContext = useTodo();
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState([]);
+  console.log(dueDate, "line-20");
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -59,6 +60,7 @@ const AddTask = () => {
       subTasksList,
     };
     myContext.addTask(item);
+    console.log(item);
 
     setValue("");
     setDueDate("");
@@ -95,6 +97,8 @@ const AddTask = () => {
       setSubTask("");
     }
   };
+
+  console.log(dueDate);
 
   const removeSubTask = (subTask) => {
     const newList = subTasksList.filter((element) => element.id !== subTask);
