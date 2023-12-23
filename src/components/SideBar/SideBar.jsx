@@ -6,15 +6,7 @@ const SideBar = () => {
 
   return (
     <div className="w-1/5 bg-black h-[100vh]">
-      <h1
-        style={{
-          color: "#DEDEDE",
-          fontWeight: 300,
-          marginLeft: "20px",
-          fontSize: "30px",
-          color: "white",
-        }}
-      >
+      <h1 className="text-stone-50 text-3xl p-3.5 font-extralight">
         Priority Tasks
       </h1>
       {/* 

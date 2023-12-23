@@ -70,9 +70,10 @@ const Home = () => {
           onBlur={handleInputBlur}
         />
 
-        <div style={{ display: "flex" }}>
+        <div className="flex">
           <Link
             to="/task/add"
+            // className="m-20 p-10 rounded-2xl border-none bg-white cursor-pointer no-underline text-black text-sm"
             style={{
               margin: "20px",
               padding: "10px",
@@ -88,6 +89,7 @@ const Home = () => {
             Add Task
           </Link>
           <button
+            // className="m-20 p-10 rounded-2xl border-none bg-{{ backgroundColor }} cursor-pointer text-white text-sm transition-all duration-200 ease-in-out"
             style={{
               margin: "20px",
               padding: "10px",
