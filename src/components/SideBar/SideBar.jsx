@@ -5,16 +5,7 @@ const SideBar = () => {
   const { priorTasks, setPriorTasks } = useContext(TaskContext);
 
   return (
-    <div
-      className="w-1/5 bg-red-600 h-[100vh]"
-      // style={{
-      //   width: "20%",
-      //   // minWidth: "300px",
-      //   height: "100vh",
-      //   background: "black",
-      //   backdropFilter: "blur(10px)",
-      // }}
-    >
+    <div className="w-1/5 bg-black h-[100vh]">
       <h1
         style={{
           color: "#DEDEDE",

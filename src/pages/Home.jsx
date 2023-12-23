@@ -62,22 +62,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-8 min-w-96 my-5 rounded-lg text-sm outline-none"
-          // style={{
-          //   padding: "10px",
-          //   margin: "20px",
-          //   minWidth: "450px",
-          //   borderRadius: "10px",
-          //   border: "none",
-          //   outline: "none",
-          //   background: "rgba(1, 1, 1, 0.5)",
-          //   backdropFilter: " blur(10px)",
-          //   position: "relative",
-          //   color: "grey",
-          //   fontWeight: 300,
-          //   fontSize: "15px",
-          //   fontFamily: "sans-serif",
-          // }}
+          className="px-8 min-w-[12rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}
@@ -191,7 +176,7 @@ const Home = () => {
         style={{
           color: "white",
           fontWeight: 300,
-          marginTop: "150px",
+          marginTop: "120px",
           fontSize: "30px",
           display: "inline-block",
         }}
