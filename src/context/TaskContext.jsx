@@ -12,7 +12,8 @@ export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
   const [value, searchValue] = useState("");
-  const [sort, setSort] = useState([]);
+  const [sort, setSort] = useState("");
+
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
@@ -77,6 +78,20 @@ export const TaskProvider = ({ children }) => {
     setSort(sortBy);
   };
 
+  // if (sort === "priority-high") {
+  //   filteredTasks.sort((a, b) => b.priority - a.priority);
+  // } else if (sort === "priority-low") {
+  //   filteredTasks.sort((a, b) => a.priority - b.priority);
+  // } else if (sort === "complexity-high") {
+  //   filteredTasks.sort((a, b) => b.complexity - a.complexity);
+  // } else if (sort === "complexity-low") {
+  //   filteredTasks.sort((a, b) => a.complexity - b.complexity);
+  // } else if (sort === "ascending-high") {
+  //   filteredTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  // } else if (sort === "descending-low") {
+  //   filteredTasks.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+  // }
+
   if (sort === "priority-high") {
     filteredTasks.sort((a, b) => b.priority - a.priority);
   } else if (sort === "priority-low") {
@@ -86,9 +101,29 @@ export const TaskProvider = ({ children }) => {
   } else if (sort === "complexity-low") {
     filteredTasks.sort((a, b) => a.complexity - b.complexity);
   } else if (sort === "ascending-high") {
-    filteredTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    filteredTasks.sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+
+      if (isNaN(dateA) || isNaN(dateB)) {
+        if (isNaN(dateA)) return 1;
+        if (isNaN(dateB)) return -1;
+      }
+
+      return dateA - dateB;
+    });
   } else if (sort === "descending-low") {
-    filteredTasks.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+    filteredTasks.sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+
+      if (isNaN(dateA) || isNaN(dateB)) {
+        if (isNaN(dateA)) return -1;
+        if (isNaN(dateB)) return 1;
+      }
+
+      return dateB - dateA;
+    });
   }
 
   return (

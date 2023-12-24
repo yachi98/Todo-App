@@ -31,6 +31,31 @@ const Home = () => {
     console.log(highestPriorityTask);
   };
 
+  // useEffect(() => {
+  //   if (isPowerMode) {
+  //     // Find the task with the highest priority and complexity
+  //     const highestPriorityTask = tasks.reduce(
+  //       (acc, el) => {
+  //         if (
+  //           el.priority > acc.priority ||
+  //           (el.priority === acc.priority && el.complexity > acc.complexity)
+  //         ) {
+  //           return el;
+  //         }
+  //         return acc;
+  //       },
+  //       { priority: -Infinity, complexity: -Infinity }
+  //     );
+
+  //     // Filter tasks to display only the task with the highest priority and complexity
+  //     const filteredTasks = [highestPriorityTask];
+  //     setFilteredTasks(filteredTasks); // Assuming you have a state for filtered tasks
+  //   } else {
+  //     // If Power Mode is turned off, display all tasks
+  //     setFilteredTasks(tasks); // Set back to all tasks
+  //   }
+  // }, [isPowerMode, tasks]);
+
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
     inputRef.current.style.outlineOffset = "3px";
