@@ -52,6 +52,8 @@ const EditTask = () => {
     setDueDate(e.target.value);
   };
 
+  console.log(Date);
+
   return (
     <div
       style={{
