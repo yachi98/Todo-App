@@ -105,7 +105,7 @@ const Home = () => {
           >
             Power Mode
           </button>
-          <div className="relative">
+          <div>
             <button
               onClick={handleClick}
               style={{
@@ -133,10 +133,9 @@ const Home = () => {
                 style={{
                   background: "black",
                   width: "200px",
-                  height: "270px",
+                  height: "370px",
                   borderRadius: "15px",
                   position: "absolute",
-                  // marginRight: "335px",
                   top: "75px",
                   zIndex: 999,
                   display: "flex",
@@ -168,6 +167,16 @@ const Home = () => {
                   text="Least Complex"
                   sortBy="complexity"
                 />
+                <SortItem
+                  onClick={() => sortTask("ascending-high")}
+                  text="Date Ascending"
+                  sortBy="dueDate"
+                />
+                <SortItem
+                  onClick={() => sortTask("descending-low")}
+                  text="Date Descending"
+                  sortBy="dueDate"
+                />
               </motion.div>
             )}
           </div>
@@ -193,7 +202,6 @@ const Home = () => {
           marginTop: "30px",
           display: "flex",
           flexWrap: "wrap",
-
           gap: "10px",
         }}
       >
@@ -218,7 +226,6 @@ const Home = () => {
               transition: "all 0.2s ease-out",
             }}
           >
-            {/* <div style={{ display: "flex", justifyContent: "space-between" }}> */}
             <div className="flex justify-between items-center">
               <Link to={`/task/${task.id}`} style={{ textDecoration: "none" }}>
                 <strong
@@ -236,7 +243,7 @@ const Home = () => {
                 style={{
                   display: "flex",
                   justifyContent: "right",
-                  gap: "10px",
+                  gap: "15px",
                 }}
               >
                 <svg

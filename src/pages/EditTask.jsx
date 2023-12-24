@@ -10,7 +10,7 @@ const EditTask = () => {
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState(task ? task.value : "");
-  const [dueDate, setDueDate] = useState(useTodo ? useTodo.date : "");
+  const [dueDate, setDueDate] = useState(Date || null);
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
@@ -164,7 +164,7 @@ const EditTask = () => {
             style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}
             htmlFor="task-date"
           >
-            Due Date: {dueDate}
+            Due Date:
           </label>
           <form
             style={{

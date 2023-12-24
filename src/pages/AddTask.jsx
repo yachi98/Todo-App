@@ -227,7 +227,7 @@ const AddTask = () => {
             style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}
             htmlFor="task-date"
           >
-            Due Date: {dueDate}
+            Due Date:
           </label>
           <form
             style={{

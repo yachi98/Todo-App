@@ -85,6 +85,10 @@ export const TaskProvider = ({ children }) => {
     filteredTasks.sort((a, b) => b.complexity - a.complexity);
   } else if (sort === "complexity-low") {
     filteredTasks.sort((a, b) => a.complexity - b.complexity);
+  } else if (sort === "ascending-high") {
+    filteredTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  } else if (sort === "descending-low") {
+    filteredTasks.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
   }
 
   return (
