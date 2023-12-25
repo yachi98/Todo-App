@@ -31,6 +31,8 @@ export const TaskProvider = ({ children }) => {
     setTasks(completedTasks);
   };
 
+  let completed;
+
   const addTask = (newTodo) => {
     const newTask = [...tasks, newTodo];
     setTasks(newTask);
