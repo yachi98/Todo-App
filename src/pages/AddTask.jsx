@@ -105,6 +105,10 @@ const AddTask = () => {
     setSubTasksList(newList);
   };
 
+  const hello = () => {
+    console.log("hello");
+  };
+
   const checkSubTask = (id) => {
     const newList = subTasksList.map((element) => {
       if (element.id === id) {
