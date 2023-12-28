@@ -127,13 +127,10 @@ const AddTask = () => {
           to="/"
           style={{
             textDecoration: "none",
-            color: "grey",
             background: "black",
             padding: "10px",
             borderRadius: "10px",
-            background: "linear-gradient(to right, #0074D9, #7FDBFF)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
+            color: "white",
           }}
         >
           Home
@@ -145,9 +142,6 @@ const AddTask = () => {
             fontSize: "22px",
             color: "#DEDEDE",
             fontWeight: 300,
-            background: "linear-gradient(to left, #0074D9, #7FDBFF)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
           }}
         >
           Add Task
