@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx";
 import AddTask from "./pages/AddTask.jsx";
 import EditTask from "./pages/EditTask.jsx";
-import SideBar from "./components/SideBar/SideBar.jsx";
+// import SideBar from "./components/SideBar/SideBar.jsx";
 import "./App.css";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <Router>
       <TaskProvider>
         <div style={{ display: "flex" }}>
-          <SideBar />
+          {/* <SideBar /> */}
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/home" element={<Home />} />

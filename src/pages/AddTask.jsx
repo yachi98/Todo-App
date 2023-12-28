@@ -118,7 +118,7 @@ const AddTask = () => {
   return (
     <div
       style={{
-        width: "80%",
+        width: "100%",
         height: "100vh",
         background: "rgb(1,1,1,0.5)",
         backdropFilter: " blur(10px)",
@@ -200,7 +200,7 @@ const AddTask = () => {
         <h3 style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}>
           Priority
         </h3>
-        <div style={{ display: "flex", gap: "8px" }}>
+        <div style={{ display: "flex", gap: "15px" }}>
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
@@ -209,7 +209,7 @@ const AddTask = () => {
         <h3 style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}>
           Complexity
         </h3>
-        <div style={{ display: "flex", gap: "8px" }}>
+        <div style={{ display: "flex", gap: "15px" }}>
           <Buttons
             selectedValues={complexity}
             clickedBtn={handleComplexityChange}
