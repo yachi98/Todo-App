@@ -120,6 +120,8 @@ const AddTask = () => {
         background: "rgb(1,1,1,0.5)",
         backdropFilter: " blur(10px)",
         padding: "10px 20px",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
       <div style={{ marginTop: "35px" }}>
@@ -151,7 +153,11 @@ const AddTask = () => {
           onSubmit={handleSubmit}
         >
           <label
-            style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}
+            style={{
+              fontSize: "20px",
+              color: "#DEDEDE",
+              fontWeight: 300,
+            }}
           >
             Task name
           </label>
@@ -198,7 +204,7 @@ const AddTask = () => {
         >
           Priority
         </h3>
-        <div style={{ display: "flex", gap: "15px" }}>
+        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
@@ -214,7 +220,7 @@ const AddTask = () => {
         >
           Complexity
         </h3>
-        <div style={{ display: "flex", gap: "15px" }}>
+        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
           <Buttons
             selectedValues={complexity}
             clickedBtn={handleComplexityChange}
@@ -229,7 +235,11 @@ const AddTask = () => {
           }}
         >
           <label
-            style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}
+            style={{
+              fontSize: "20px",
+              color: "#DEDEDE",
+              fontWeight: 300,
+            }}
             htmlFor="task-date"
           >
             Due Date:

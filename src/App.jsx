@@ -12,7 +12,6 @@ function App() {
     <Router>
       <TaskProvider>
         <div style={{ display: "flex" }}>
-          {/* <SideBar /> */}
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/home" element={<Home />} />

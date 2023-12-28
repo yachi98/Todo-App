@@ -41,18 +41,6 @@ export const TaskProvider = ({ children }) => {
     setTasks(newList);
   };
 
-  const priorityTask = () => {
-    if (newTask.trim() !== "") {
-      const priorTaskItem = {
-        id: uid(),
-        value: newTask,
-      };
-
-      setTasks([...tasks, priorTaskItem]);
-      setNewTask("");
-    }
-  };
-
   const handleTask = (e) => {
     searchValue(e.target.value);
   };
@@ -123,7 +111,6 @@ export const TaskProvider = ({ children }) => {
         sortTask,
         getTask,
         updateTask,
-        priorityTask,
         value,
       }}
     >

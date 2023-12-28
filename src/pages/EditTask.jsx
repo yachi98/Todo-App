@@ -9,8 +9,9 @@ const EditTask = () => {
   const task = getTask(id);
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
-  const [value, setValue] = useState(task ? task.value : "");
-  const [dueDate, setDueDate] = useState(Date || null);
+  const [value, setValue] = useState(task.value);
+  // const [dueDate, setDueDate] = useState(Date || null);
+  const [dueDate, setDueDate] = useState(task.dueDate);
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
@@ -60,6 +61,8 @@ const EditTask = () => {
         background: "rgb(1,1,1,0.5)",
         backdropFilter: " blur(10px)",
         padding: "10px 20px",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
       <div style={{ marginTop: "35px" }}>
@@ -67,13 +70,10 @@ const EditTask = () => {
           to="/"
           style={{
             textDecoration: "none",
-            color: "grey",
+            color: "white",
             background: "black",
             padding: "10px",
             borderRadius: "10px",
-            background: "linear-gradient(to right, #0074D9, #7FDBFF)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
           }}
         >
           Home
@@ -85,9 +85,6 @@ const EditTask = () => {
             fontSize: "22px",
             color: "#DEDEDE",
             fontWeight: 300,
-            background: "linear-gradient(to left, #0074D9, #7FDBFF)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
           }}
         >
           Add Task
@@ -107,7 +104,7 @@ const EditTask = () => {
               background: "rgb(29, 161, 242, 0.1)",
               border: "none",
               padding: "10px",
-              color: "#DEDEDE",
+              color: "white",
               fontWeight: 300,
               borderRadius: "10px",
               fontSize: "15px",
@@ -144,7 +141,7 @@ const EditTask = () => {
         >
           Priority
         </h3>
-        <div style={{ display: "flex", gap: "15px" }}>
+        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
@@ -160,7 +157,7 @@ const EditTask = () => {
         >
           Complexity
         </h3>
-        <div style={{ display: "flex", gap: "15px" }}>
+        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
           <Buttons
             selectedValues={complexity}
             clickedBtn={handleComplexityChange}
@@ -198,7 +195,6 @@ const EditTask = () => {
                 fontWeight: 300,
                 outline: "none",
               }}
-              //   id="task-date"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}

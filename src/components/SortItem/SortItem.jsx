@@ -1,5 +1,3 @@
-// import { sortTask } from "../../context/TaskContext";
-
 const SortItem = ({ text, onClick }) => {
   return (
     <button
@@ -20,7 +18,7 @@ const SortItem = ({ text, onClick }) => {
       }}
       onMouseEnter={(e) => {
         e.target.style.background = "#1B1B1B";
-        e.target.style.color = "#1da1f2";
+        e.target.style.color = "white";
       }}
       onMouseLeave={(e) => {
         e.target.style.background = "none";

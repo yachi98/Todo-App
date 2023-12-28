@@ -71,34 +71,13 @@ const Home = () => {
         <div className="flex">
           <Link
             to="/task/add"
-            // className="m-20 p-10 rounded-2xl border-none bg-white cursor-pointer no-underline text-black text-sm"
-            style={{
-              margin: "20px",
-              padding: "10px",
-              borderRadius: "10px",
-              border: "none",
-              background: "white",
-              cursor: "pointer",
-              textDecoration: "none",
-              color: "black",
-              fontSize: "15px",
-            }}
+            className="m-5 p-2 rounded-lg border-none bg-white cursor-pointer no-underline text-black text-base"
           >
             Add Task
           </Link>
           <button
-            // className="m-20 p-10 rounded-2xl border-none bg-{{ backgroundColor }} cursor-pointer text-white text-sm transition-all duration-200 ease-in-out"
-            style={{
-              margin: "20px",
-              padding: "10px",
-              borderRadius: "10px",
-              border: "none",
-              background: backgroundColor,
-              cursor: "pointer",
-              color: "white",
-              fontSize: "15px",
-              transition: "0.2s all ease-in-out",
-            }}
+            className="m-5 p-2 rounded-lg border-none cursor-pointer text-white text-base transition duration-200 ease-in-out"
+            style={{ backgroundColor }}
             onClick={handlePower}
           >
             Power Mode
@@ -106,18 +85,7 @@ const Home = () => {
           <div>
             <button
               onClick={handleClick}
-              style={{
-                color: "white",
-                fontWeight: 300,
-                fontSize: "15px",
-                marginTop: "20px",
-                padding: "10px",
-                width: "100px",
-                background: "black",
-                borderRadius: "10px",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="text-white font-light text-base mt-5 p-2 w-24 bg-black rounded-lg border-none cursor-pointer"
             >
               Sort
             </button>
@@ -138,6 +106,7 @@ const Home = () => {
                   zIndex: 999,
                   display: "flex",
                   flexDirection: "column",
+                  backdropFilter: "blur(10px)",
                 }}
               >
                 <SortItem
@@ -203,8 +172,6 @@ const Home = () => {
           gap: "10px",
         }}
       >
-        {/* {isPowerMode && (
-        ) */}
         {tasks.map((task) => (
           <motion.li
             initial={{ y: 35 }}
@@ -214,7 +181,7 @@ const Home = () => {
             style={{
               padding: "15px",
               borderRadius: "15px",
-              background: task.completed ? "#39c6b3" : "rgb(1,1,1,0.5)",
+              background: task.completed ? "#1da1f2" : "rgb(1,1,1,0.5)",
               backdropFilter: " blur(10px)",
               height: "190px",
               width: "400px",
@@ -283,22 +250,6 @@ const Home = () => {
                   </svg>
                 </Link>
 
-                <svg
-                  onClick={() => priorityTask(task)}
-                  style={{ color: "white", width: "20px", cursor: "pointer" }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                  />
-                </svg>
                 <svg
                   onClick={() => removeTask(task.id)}
                   style={{ color: "white", width: "20px", cursor: "pointer" }}
