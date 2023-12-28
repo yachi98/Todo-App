@@ -15,8 +15,6 @@ const Home = () => {
   const [isPowerMode, setIsPowerMode] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("black");
 
-  // const displayTask = tasks.find((element) => !element.isCompleted);
-
   const handlePower = () => {
     setIsPowerMode(!isPowerMode);
     setBackgroundColor(isPowerMode ? "black" : "#1da1f2");
@@ -131,7 +129,7 @@ const Home = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
                 style={{
-                  background: "black",
+                  background: "rgb(1,1,1,0.5)",
                   width: "200px",
                   height: "370px",
                   borderRadius: "15px",
@@ -205,7 +203,8 @@ const Home = () => {
           gap: "10px",
         }}
       >
-        {/* {isPowerMode &&  */}
+        {/* {isPowerMode && (
+        ) */}
         {tasks.map((task) => (
           <motion.li
             initial={{ y: 35 }}

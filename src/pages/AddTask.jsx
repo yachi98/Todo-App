@@ -17,7 +17,6 @@ const AddTask = () => {
   const myContext = useTodo();
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState([]);
-  console.log(dueDate, "line-20");
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -97,8 +96,6 @@ const AddTask = () => {
       setSubTask("");
     }
   };
-
-  console.log(dueDate);
 
   const removeSubTask = (subTask) => {
     const newList = subTasksList.filter((element) => element.id !== subTask);
@@ -197,7 +194,14 @@ const AddTask = () => {
           </div>
         )}
 
-        <h3 style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}>
+        <h3
+          style={{
+            fontSize: "20px",
+            color: "#DEDEDE",
+            fontWeight: 300,
+            marginTop: "40px",
+          }}
+        >
           Priority
         </h3>
         <div style={{ display: "flex", gap: "15px" }}>
@@ -206,7 +210,14 @@ const AddTask = () => {
             clickedBtn={handlePriorityChange}
           />
         </div>
-        <h3 style={{ fontSize: "20px", color: "#DEDEDE", fontWeight: 300 }}>
+        <h3
+          style={{
+            fontSize: "20px",
+            color: "#DEDEDE",
+            fontWeight: 300,
+            marginTop: "40px",
+          }}
+        >
           Complexity
         </h3>
         <div style={{ display: "flex", gap: "15px" }}>

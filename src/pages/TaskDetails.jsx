@@ -15,7 +15,7 @@ const TaskDetails = () => {
   return (
     <div
       style={{
-        width: "80%",
+        width: "100%",
         height: "100vh",
         background: "rgb(1,1,1,0.5)",
         backdropFilter: " blur(10px)",

@@ -41,7 +41,7 @@ export const TaskProvider = ({ children }) => {
     setTasks(newList);
   };
 
-  const priorityTask = (task) => {
+  const priorityTask = () => {
     if (newTask.trim() !== "") {
       const priorTaskItem = {
         id: uid(),
@@ -77,20 +77,6 @@ export const TaskProvider = ({ children }) => {
   const sortTask = (sortBy) => {
     setSort(sortBy);
   };
-
-  // if (sort === "priority-high") {
-  //   filteredTasks.sort((a, b) => b.priority - a.priority);
-  // } else if (sort === "priority-low") {
-  //   filteredTasks.sort((a, b) => a.priority - b.priority);
-  // } else if (sort === "complexity-high") {
-  //   filteredTasks.sort((a, b) => b.complexity - a.complexity);
-  // } else if (sort === "complexity-low") {
-  //   filteredTasks.sort((a, b) => a.complexity - b.complexity);
-  // } else if (sort === "ascending-high") {
-  //   filteredTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  // } else if (sort === "descending-low") {
-  //   filteredTasks.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
-  // }
 
   if (sort === "priority-high") {
     filteredTasks.sort((a, b) => b.priority - a.priority);
