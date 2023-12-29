@@ -232,16 +232,17 @@ const EditTask = () => {
                 placeholder="Add Task..."
               />
               <button
-                style={{
-                  background: "rgb(29, 161, 242, 0.1)",
-                  color: "#DEDEDE",
-                  border: "none",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                  fontSize: "15px",
-                  fontWeight: 300,
-                  cursor: "pointer",
-                }}
+                className="bg-rgba-29-161-242-10 text-white border-none p-2 md:p-4 rounded-10 text-base md:text-lg font-light cursor-pointer"
+                // style={{
+                //   background: "rgb(29, 161, 242, 0.1)",
+                //   color: "#DEDEDE",
+                //   border: "none",
+                //   padding: "10px 20px",
+                //   borderRadius: "10px",
+                //   fontSize: "15px",
+                //   fontWeight: 300,
+                //   cursor: "pointer",
+                // }}
               >
                 Add
               </button>

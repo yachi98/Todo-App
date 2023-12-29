@@ -8,7 +8,7 @@ import { TaskContext } from "../context/TaskContext";
 const Home = () => {
   const inputRef = useRef(null);
   const { tasks } = useContext(TaskContext);
-  const { removeTask, completeTask, handleTask, sortTask, priorityTask } =
+  const { removeTask, completeTask, handleTask, sortTask } =
     useContext(TaskContext);
   const divRef = useRef(null);
   const [showFilters, setShowFilters] = useState(false);

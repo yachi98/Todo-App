@@ -14,8 +14,6 @@ export const TaskProvider = ({ children }) => {
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
 
-  const [newTask, setNewTask] = useState("");
-
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
