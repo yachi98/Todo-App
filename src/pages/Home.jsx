@@ -60,7 +60,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-8 min-w-[12rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10"
+          className="px-8 min-w-[20rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}

@@ -10,8 +10,7 @@ const EditTask = () => {
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState(task.value);
-  // const [dueDate, setDueDate] = useState(Date || null);
-  const [dueDate, setDueDate] = useState(task.dueDate);
+  const [dueDate, setDueDate] = useState(task.date);
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
@@ -177,13 +176,7 @@ const EditTask = () => {
           >
             Due Date:
           </label>
-          <form
-            style={{
-              background: "rgb(29, 161, 242, 0.1)",
-              maxWidth: "550px",
-              borderRadius: "10px",
-            }}
-          >
+          <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
               style={{
                 background: "none",
