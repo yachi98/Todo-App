@@ -5,87 +5,35 @@ import { useTodo } from "../context/TaskContext";
 import React from "react";
 
 const TaskDetails = () => {
-  const { tasks, getTask, updateTask, removeTask } = useTodo();
+  const { getTask, updateTask, removeTask } = useTodo();
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
-  const [complexity, setComplexity] = useState(null);
-  const [priority, setPriority] = useState(null);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100vh",
-        background: "rgb(1,1,1,0.5)",
-        backdropFilter: " blur(10px)",
-        padding: "10px 20px",
-      }}
-    >
-      <div
-        style={{
-          marginTop: "35px",
-          display: "flex",
-          gap: "20px",
-          alignItems: "center",
-        }}
-      >
+    <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
+      <div class="mt-9 flex gap-5 items-center">
         <Link
           to="/"
-          style={{
-            textDecoration: "none",
-            color: "grey",
-            background: "black",
-            padding: "10px",
-            borderRadius: "10px",
-            background: "linear-gradient(to right, #0074D9, #7FDBFF)",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-          }}
+          class="no-underline text-white bg-black py-2 px-4 rounded-lg"
         >
           Home
         </Link>
-        <div style={{ fontSize: "25px", color: "white" }}>{value}</div>
-        <div
-          style={{
-            color: "white",
-            border: "none",
-            padding: "10px",
-            borderRadius: "10px",
-            background: "#E65AF1",
-            width: "120px",
-          }}
-        >
+        <div className="text-white text-2xl">{value}</div>
+        <div className="text-white border-none p-2 rounded-lg bg-purple-400 w-28">
           Priority: {task.priority}
         </div>
-        <div
-          style={{
-            color: "black",
-            border: "none",
-            padding: "10px",
-            borderRadius: "10px",
-            background: "white",
-            width: "120px",
-          }}
-        >
+        <div className="text-black border-none p-2 rounded-lg bg-white w-36">
           Complexity: {task.complexity}
         </div>
         <Link to={`/task/edit/${task.id}`}>
           <svg
-            style={{
-              color: "white",
-              width: "20px",
-              cursor: "pointer",
-              background: "rgb(1,1,1,0.3)",
-              padding: "10px",
-              borderRadius: "15px",
-            }}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-9 h-9 text-white cursor-pointer bg-opacity-30 p-2 rounded-3xl"
           >
             <path
               strokeLinecap="round"
@@ -98,22 +46,12 @@ const TaskDetails = () => {
           <Link to="/">
             <svg
               onClick={() => removeTask(task.id)}
-              // style={{
-              //   color: "white",
-              //   width: "20px",
-              //   height: "20px",
-              //   cursor: "pointer",
-              //   border: "1px solid white",
-              //   background: "rgb(1,1,1,0.3)",
-              //   padding: "10px",
-              //   borderRadius: "15px",
-              // }}
               xmlns="http://www.w3.org/2000/svg"
               fill="white"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 bg-blue-300"
+              className="w-9 h-9 text-white cursor-pointer bg-opacity-30 p-2 rounded-3xl"
             >
               <path
                 strokeLinecap="round"

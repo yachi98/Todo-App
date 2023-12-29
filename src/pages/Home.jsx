@@ -96,18 +96,7 @@ const Home = () => {
                 initial={{ y: 15 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
-                style={{
-                  background: "rgb(1,1,1,0.5)",
-                  width: "200px",
-                  height: "370px",
-                  borderRadius: "15px",
-                  position: "absolute",
-                  top: "75px",
-                  zIndex: 999,
-                  display: "flex",
-                  flexDirection: "column",
-                  backdropFilter: "blur(10px)",
-                }}
+                className="bg-opacity-50 w-52 h-96 rounded-xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
               >
                 <SortItem
                   onClick={() => sortTask("default")}
@@ -150,28 +139,11 @@ const Home = () => {
         </div>
       </div>
 
-      <h1
-        style={{
-          color: "white",
-          fontWeight: 300,
-          marginTop: "120px",
-          fontSize: "30px",
-          display: "inline-block",
-        }}
-      >
+      <h1 className="text-white font-light mt-32 text-4xl inline-block">
         All Tasks
       </h1>
 
-      <ul
-        style={{
-          listStyle: "none",
-          minWidth: "360px",
-          marginTop: "30px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
+      <ul className="list-none min-w-360 mt-8 flex flex-wrap gap-4">
         {tasks.map((task) => (
           <motion.li
             initial={{ y: 35 }}
@@ -179,18 +151,9 @@ const Home = () => {
             transition={{ duration: 0.3 }}
             key={task.id}
             style={{
-              padding: "15px",
-              borderRadius: "15px",
-              background: task.completed ? "#1da1f2" : "rgb(1,1,1,0.5)",
-              backdropFilter: " blur(10px)",
-              height: "190px",
-              width: "400px",
-              display: "flex",
-              zIndex: 1,
-              flexDirection: "column",
-              gap: "10px",
-              transition: "all 0.2s ease-out",
+              background: task.completed ? "#1da1f2" : "rgb(1,1,1,0.3)",
             }}
+            className="p-4 rounded-2xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
           >
             <div className="flex justify-between items-center">
               <Link to={`/task/${task.id}`} style={{ textDecoration: "none" }}>
@@ -205,22 +168,15 @@ const Home = () => {
                   {task.value}
                 </strong>
               </Link>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  gap: "15px",
-                }}
-              >
+              <div className="flex gap-4">
                 <svg
                   onClick={() => completeTask(task.id)}
-                  style={{ color: "white", width: "25px", cursor: "pointer" }}
+                  className="text-white w-6 cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -230,17 +186,12 @@ const Home = () => {
                 </svg>
                 <Link to={`/task/edit/${task.id}`}>
                   <svg
-                    style={{
-                      color: "white",
-                      width: "20px",
-                      cursor: "pointer",
-                    }}
+                    className="text-white w-6 cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -252,13 +203,12 @@ const Home = () => {
 
                 <svg
                   onClick={() => removeTask(task.id)}
-                  style={{ color: "white", width: "20px", cursor: "pointer" }}
+                  className="text-white w-6 cursor-pointer"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"

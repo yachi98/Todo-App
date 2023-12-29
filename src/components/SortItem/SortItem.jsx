@@ -10,19 +10,19 @@ const SortItem = ({ text, onClick }) => {
         borderRadius: "10px",
         cursor: "pointer",
         background: "none",
-        color: "#1da1f2",
+        color: "white",
         border: "none",
         fontSize: "15px",
         transition: "background-color 0.2s ease",
         textAlign: "left",
       }}
       onMouseEnter={(e) => {
-        e.target.style.background = "#1B1B1B";
-        e.target.style.color = "white";
+        e.target.style.background = "white";
+        e.target.style.color = "black";
       }}
       onMouseLeave={(e) => {
         e.target.style.background = "none";
-        e.target.style.color = "#1da1f2";
+        e.target.style.color = "white";
       }}
     >
       {text}
