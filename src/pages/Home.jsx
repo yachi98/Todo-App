@@ -47,6 +47,7 @@ const Home = () => {
   const handleClick = () => {
     setShowFilters(true);
   };
+  const name = "daniel";
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
