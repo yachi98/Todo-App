@@ -58,7 +58,6 @@ const AddTask = () => {
       subTasksList,
     };
     myContext.addTask(item);
-    console.log(item);
 
     setValue("");
     setDueDate("");
