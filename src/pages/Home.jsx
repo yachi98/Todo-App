@@ -17,6 +17,8 @@ const Home = () => {
 
   const [highestPriorityTask, setHighestPriority] = useState(null);
 
+  let hi;
+
   const handlePower = () => {
     //  need to finish power mode, still doesn't display one item
     setIsPowerMode(!isPowerMode);
