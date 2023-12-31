@@ -15,24 +15,22 @@ const Home = () => {
   const [isPowerMode, setIsPowerMode] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("black");
 
-  let highestPriorityTask = null;
+  const [highestPriorityTask, setHighestPriority] = useState(null);
 
   const handlePower = () => {
     //  need to finish power mode, still doesn't display one item
     setIsPowerMode(!isPowerMode);
     setBackgroundColor(isPowerMode ? "black" : "#1da1f2");
 
-    if (tasks.length > 0) {
-      highestPriorityTask = tasks.reduce((highestTask, currentTask) => {
-        const isHigherPriority =
-          currentTask.priority >= highestTask.priority &&
-          currentTask.complexity >= highestTask.complexity;
+    const nextHighestPriorityTask = tasks.reduce((highestTask, currentTask) => {
+      const isHigherPriority =
+        currentTask.priority + currentTask.complexity >=
+        highestTask.priority + highestTask.complexity;
 
-        return isHigherPriority ? currentTask : highestTask;
-      });
-    }
+      return isHigherPriority ? currentTask : highestTask;
+    });
 
-    console.log(highestPriorityTask);
+    setHighestPriority(nextHighestPriorityTask);
   };
 
   const handleInputFocus = () => {
@@ -47,7 +45,8 @@ const Home = () => {
   const handleClick = () => {
     setShowFilters(true);
   };
-  const name = "daniel";
+
+  let hi;
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -62,6 +61,8 @@ const Home = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+
+  console.log(highestPriorityTask);
 
   return (
     <div className="w-full pl-5">
