@@ -15,6 +15,7 @@ const Home = () => {
   const [isPowerMode, setIsPowerMode] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("black");
   const [highestPriorityTask, setHighestPriority] = useState(null);
+  const [dueToday, setDueToday] = useState(null);
 
   const handlePower = () => {
     setIsPowerMode(!isPowerMode);
@@ -31,7 +32,19 @@ const Home = () => {
     setHighestPriority(nextHighestPriorityTask);
   };
 
-  let hi;
+  const isToday = (dueDate) => {
+    const today = new Date();
+    return (
+      dueDate.getDate() === today.getDate() &&
+      dueDate.getMonth() === today.getMonth() &&
+      dueDate.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const ifDueToday = (dueDate) => {
+    const formattedDueDate = new Date(dueDate);
+    return isToday(formattedDueDate) ? "text-red-500" : "";
+  };
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -64,7 +77,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-8 min-w-[20rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
+          className="px-4 min-w-[35rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}
@@ -353,6 +366,7 @@ const Home = () => {
               </div>
 
               <div
+                className={`text-gray-300 font-normal ${ifDueToday(task.date)}`}
                 style={{
                   color: task.completed ? "#000517" : "#E1E1E1",
                   fontWeight: task.completed ? 400 : 300,

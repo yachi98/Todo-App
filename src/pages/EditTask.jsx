@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Buttons from "../components/Buttons/Buttons";
 import { Link, useParams } from "react-router-dom";
-import { TaskContext, useTodo } from "../context/TaskContext";
+import { useTodo } from "../context/TaskContext";
 
 const EditTask = () => {
-  const { tasks, getTask, updateTask } = useTodo();
+  const { tasks, getTask, updateTask, addTask } = useTodo();
   const { id } = useParams();
   const task = getTask(id);
   const inputRef = useRef(null);
@@ -37,7 +37,7 @@ const EditTask = () => {
       setNoTaskAdded(true);
       return;
     }
-    updateTask(tasks, value, priority, complexity);
+    updateTask(tasks, value, priority, complexity, addTask);
   };
 
   const handlePriorityChange = (value) => {
@@ -53,41 +53,17 @@ const EditTask = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100vh",
-        background: "rgb(1,1,1,0.5)",
-        backdropFilter: " blur(10px)",
-        padding: "10px 20px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <div className="w-full h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-10 p-10 flex justify-center">
       <div style={{ marginTop: "35px" }}>
         <Link
+          className="text-white no-underline bg-black p-10 rounded-2xl"
           to="/"
-          style={{
-            textDecoration: "none",
-            color: "white",
-            background: "black",
-            padding: "10px",
-            borderRadius: "10px",
-          }}
         >
           Home
         </Link>
       </div>
       <div style={{ marginTop: "70px" }}>
-        <h3
-          style={{
-            fontSize: "22px",
-            color: "#DEDEDE",
-            fontWeight: 300,
-          }}
-        >
-          Add Task
-        </h3>
+        <h3 className="text-gray-300 text-lg font-light">Add Task</h3>
         <form
           style={{ display: "flex", flexDirection: "column", gap: "30px" }}
           onSubmit={handleSubmit}
@@ -98,17 +74,7 @@ const EditTask = () => {
             Task name
           </label>
           <input
-            style={{
-              maxWidth: "550px",
-              background: "rgb(29, 161, 242, 0.1)",
-              border: "none",
-              padding: "10px",
-              color: "white",
-              fontWeight: 300,
-              borderRadius: "10px",
-              fontSize: "15px",
-              outline: "none",
-            }}
+            className="max-w-550px bg-blue-400 bg-opacity-25 border-0 p-10 text-white font-light rounded-lg text-base outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -118,29 +84,13 @@ const EditTask = () => {
           />
         </form>
         {noTaskAdded && (
-          <div
-            style={{
-              color: "#EE4D4D",
-              marginTop: "10px",
-              fontWeight: 300,
-              fontSize: "20px",
-            }}
-          >
+          <div className="text-red-500 mt-4 font-light text-lg">
             No task added
           </div>
         )}
 
-        <h3
-          style={{
-            fontSize: "20px",
-            color: "#DEDEDE",
-            fontWeight: 300,
-            marginTop: "40px",
-          }}
-        >
-          Priority
-        </h3>
-        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+        <h3 className="text-gray-300 text-lg font-light mt-10">Priority</h3>
+        <div className="flex gap-4 mt-5">
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
@@ -156,7 +106,7 @@ const EditTask = () => {
         >
           Complexity
         </h3>
-        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+        <div className="flex gap-4 mt-5">
           <Buttons
             selectedValues={complexity}
             clickedBtn={handleComplexityChange}
@@ -196,7 +146,6 @@ const EditTask = () => {
           <div
             style={{
               display: "flex",
-              //   alignItems: "center",
               flexDirection: "column",
               gap: "30px",
             }}
@@ -231,19 +180,7 @@ const EditTask = () => {
                 onBlur={handleInputBlur2}
                 placeholder="Add Task..."
               />
-              <button
-                className="bg-rgba-29-161-242-10 text-white border-none p-2 md:p-4 rounded-10 text-base md:text-lg font-light cursor-pointer"
-                // style={{
-                //   background: "rgb(29, 161, 242, 0.1)",
-                //   color: "#DEDEDE",
-                //   border: "none",
-                //   padding: "10px 20px",
-                //   borderRadius: "10px",
-                //   fontSize: "15px",
-                //   fontWeight: 300,
-                //   cursor: "pointer",
-                // }}
-              >
+              <button className="bg-rgba-29-161-242-10 text-white border-none p-2 md:p-4 rounded-10 text-base md:text-lg font-light cursor-pointer">
                 Add
               </button>
             </div>

@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef } from "react";
 import Buttons from "../components/Buttons/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { uid } from "uid";
@@ -11,11 +11,11 @@ const AddTask = () => {
   const [complexity, setComplexity] = useState(null);
   const [priority, setPriority] = useState(null);
   const [dueDate, setDueDate] = useState(Date || null);
-  const navigate = useNavigate();
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const myContext = useTodo();
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState([]);
+  const navigate = useNavigate();
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -322,7 +322,7 @@ const AddTask = () => {
                 Add
               </button>
             </div>
-            <ul style={{ marginTop: "-20px", marginLeft: "-40px" }}>
+            <ul style={{ marginTop: "-30px" }}>
               {subTasksList.map((task, index) => (
                 <li
                   style={{

@@ -1,5 +1,4 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { uid } from "uid";
 
 export const TaskContext = createContext();
 
@@ -13,6 +12,7 @@ export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
+  const [editTaskId, setEditTaskId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -47,7 +47,6 @@ export const TaskProvider = ({ children }) => {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId ? { ...task, value: updatedValue } : task
     );
-
     setTasks(updatedTasks);
     setEditTaskId(null);
   };
