@@ -41,8 +41,18 @@ const Home = () => {
     );
   };
 
+  // const ifDueToday = (dueDate) => {
+  //   const formattedDueDate = new Date(dueDate);
+  //   const isCurrentDay = isToday(formattedDueDate);
+  //   if (isCurrentDay) {
+  //     console.log(formattedDueDate, "correct");
+  //   }
+  //   return isCurrentDay ? "text-red-500" : "";
+  // };
+
   const ifDueToday = (dueDate) => {
     const formattedDueDate = new Date(dueDate);
+    console.log(formattedDueDate, "correct");
     return isToday(formattedDueDate) ? "text-red-500" : "";
   };
 
@@ -366,7 +376,10 @@ const Home = () => {
               </div>
 
               <div
-                className={`text-gray-300 font-normal ${ifDueToday(task.date)}`}
+                // className={`text-gray-300 font-normal ${ifDueToday(task.date)}`}
+                className={`text-gray-300 font-normal ${
+                  isToday(new Date(task.date)) ? "text-red-500" : ""
+                }`}
                 style={{
                   color: task.completed ? "#000517" : "#E1E1E1",
                   fontWeight: task.completed ? 400 : 300,

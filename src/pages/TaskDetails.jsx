@@ -5,11 +5,10 @@ import { useTodo } from "../context/TaskContext";
 import React from "react";
 
 const TaskDetails = () => {
-  const { getTask, updateTask, removeTask } = useTodo();
+  const { getTask, removeTask } = useTodo();
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
-  const [subValue, setSubValue] = useState(task ? task.subValue : "");
 
   return (
     <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
@@ -61,12 +60,14 @@ const TaskDetails = () => {
               />
             </svg>
           </Link>
-          {task.subTasksList.map((subTask, index) => (
-            <span className="text-white" key={index}>
-              {subTask.value}
-            </span>
-          ))}
         </div>
+        <span className="text-white">Due date: {task.date}</span>
+        <span className="text-white">Subtask Checklist {task.subValue}</span>
+        {task.subTasksList.map((subTask, index) => (
+          <span className="text-white" key={index}>
+            {subTask.name}
+          </span>
+        ))}
       </div>
     </div>
   );

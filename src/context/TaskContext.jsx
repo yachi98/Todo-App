@@ -10,6 +10,7 @@ export function useTodo() {
 export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
+  const [subTasksList, setSubTasks] = useState([]);
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
   const [editTaskId, setEditTaskId] = useState(null);
@@ -21,7 +22,7 @@ export const TaskProvider = ({ children }) => {
   const completeTask = (id) => {
     const completedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, completed: !task.completed };
+        return { ...task, completed: !task.completed }; // returns a new object
       }
       return task;
     });
@@ -106,6 +107,7 @@ export const TaskProvider = ({ children }) => {
         removeTask,
         handleTask,
         sortTask,
+        subTasksList,
         getTask,
         updateTask,
         value,
