@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTodo } from "../context/TaskContext";
@@ -9,13 +9,14 @@ const TaskDetails = () => {
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
+  const [subValue, setSubValue] = useState(task ? task.subValue : "");
 
   return (
     <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
-      <div class="mt-9 flex gap-5 items-center">
+      <div className="mt-9 flex gap-5 items-center">
         <Link
           to="/"
-          class="no-underline text-white bg-black py-2 px-4 rounded-lg"
+          className="no-underline text-white bg-black py-2 px-4 rounded-lg"
         >
           Home
         </Link>
@@ -60,6 +61,11 @@ const TaskDetails = () => {
               />
             </svg>
           </Link>
+          {task.subTasksList.map((subTask, index) => (
+            <span className="text-white" key={index}>
+              {subTask.value}
+            </span>
+          ))}
         </div>
       </div>
     </div>
