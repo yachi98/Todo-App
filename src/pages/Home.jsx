@@ -2,21 +2,19 @@ import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import SortItem from "../components/SortItem/SortItem";
 import SortTask from "../components/SortTask";
+// import HighestValueTask from "../components/HighestValueTask";
 import { TaskContext } from "../context/TaskContext";
 
 const Home = () => {
   const inputRef = useRef(null);
   const { tasks } = useContext(TaskContext);
-  const { removeTask, completeTask, handleTask, sortTask } =
-    useContext(TaskContext);
+  const { removeTask, completeTask, handleTask } = useContext(TaskContext);
   const divRef = useRef(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isPowerMode, setIsPowerMode] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("black");
   const [highestPriorityTask, setHighestPriority] = useState(null);
-  const [dueToday, setDueToday] = useState(null);
 
   const handlePower = () => {
     setIsPowerMode(!isPowerMode);
@@ -54,9 +52,6 @@ const Home = () => {
       return null;
     }
   };
-
-  const someDueDate = new Date(); // Replace this with your actual due date
-  console.log(isToday(someDueDate));
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -119,52 +114,7 @@ const Home = () => {
               Sort
             </button>
 
-            {showFilters && (
-              <SortTask />
-              // <motion.div
-              //   ref={divRef}
-              //   initial={{ y: 15 }}
-              //   animate={{ y: 0 }}
-              //   transition={{ duration: 0.5 }}
-              //   className="bg-opacity-50 w-52 h-96 rounded-xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
-              // >
-              //   <SortItem
-              //     onClick={() => sortTask("default")}
-              //     text="Default"
-              //     sortBy="default"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("priority-high")}
-              //     text="Top Priority"
-              //     sortBy="priority"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("priority-low")}
-              //     text="Low Priority"
-              //     sortBy="priority"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("complexity-high")}
-              //     text="Most Complex"
-              //     sortBy="complexity"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("complexity-low")}
-              //     text="Least Complex"
-              //     sortBy="complexity"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("ascending-high")}
-              //     text="Date Ascending"
-              //     sortBy="dueDate"
-              //   />
-              //   <SortItem
-              //     onClick={() => sortTask("descending-low")}
-              //     text="Date Descending"
-              //     sortBy="dueDate"
-              //   />
-              // </motion.div>
-            )}
+            {showFilters && <SortTask />}
           </div>
         </div>
       </div>
@@ -175,6 +125,7 @@ const Home = () => {
 
       <ul className="list-none min-w-360 mt-8 flex flex-wrap gap-4">
         {isPowerMode && highestPriorityTask ? (
+          // <HighestValueTask />
           <motion.li
             initial={{ y: 35 }}
             animate={{ y: 0 }}

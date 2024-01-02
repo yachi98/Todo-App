@@ -1,25 +1,12 @@
 import { motion } from "framer-motion";
-const divRef = useRef(null);
-
-const handleClick = () => {
-  setShowFilters(true);
-};
-
-useEffect(() => {
-  const handleOutsideClick = (e) => {
-    if (divRef.current && !divRef.current.contains(e.target)) {
-      setShowFilters(false);
-    }
-  };
-
-  document.addEventListener("mousedown", handleOutsideClick);
-
-  return () => {
-    document.removeEventListener("mousedown", handleOutsideClick);
-  };
-}, []);
+import { useRef, useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
+import SortItem from "../components/SortItem/SortItem";
 
 const SortTask = () => {
+  const divRef = useRef(null);
+  const { sortTask } = useContext(TaskContext);
+
   return (
     <motion.div
       ref={divRef}
