@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import SortItem from "../components/SortItem/SortItem";
+import SortTask from "../components/SortTask";
 import { TaskContext } from "../context/TaskContext";
 
 const Home = () => {
@@ -33,6 +34,9 @@ const Home = () => {
   };
 
   const isToday = (dueDate) => {
+    if (!dueDate) {
+      return false;
+    }
     const today = new Date();
     return (
       dueDate.getDate() === today.getDate() &&
@@ -41,20 +45,18 @@ const Home = () => {
     );
   };
 
-  // const ifDueToday = (dueDate) => {
-  //   const formattedDueDate = new Date(dueDate);
-  //   const isCurrentDay = isToday(formattedDueDate);
-  //   if (isCurrentDay) {
-  //     console.log(formattedDueDate, "correct");
-  //   }
-  //   return isCurrentDay ? "text-red-500" : "";
-  // };
-
   const ifDueToday = (dueDate) => {
     const formattedDueDate = new Date(dueDate);
-    console.log(formattedDueDate, "correct");
-    return isToday(formattedDueDate) ? "text-red-500" : "";
+    if (formattedDueDate) {
+      console.log(formattedDueDate, "correct");
+      return isToday(formattedDueDate) ? "text-red-500" : "text-green-500";
+    } else {
+      return null;
+    }
   };
+
+  const someDueDate = new Date(); // Replace this with your actual due date
+  console.log(isToday(someDueDate));
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -118,49 +120,50 @@ const Home = () => {
             </button>
 
             {showFilters && (
-              <motion.div
-                ref={divRef}
-                initial={{ y: 15 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-opacity-50 w-52 h-96 rounded-xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
-              >
-                <SortItem
-                  onClick={() => sortTask("default")}
-                  text="Default"
-                  sortBy="default"
-                />
-                <SortItem
-                  onClick={() => sortTask("priority-high")}
-                  text="Top Priority"
-                  sortBy="priority"
-                />
-                <SortItem
-                  onClick={() => sortTask("priority-low")}
-                  text="Low Priority"
-                  sortBy="priority"
-                />
-                <SortItem
-                  onClick={() => sortTask("complexity-high")}
-                  text="Most Complex"
-                  sortBy="complexity"
-                />
-                <SortItem
-                  onClick={() => sortTask("complexity-low")}
-                  text="Least Complex"
-                  sortBy="complexity"
-                />
-                <SortItem
-                  onClick={() => sortTask("ascending-high")}
-                  text="Date Ascending"
-                  sortBy="dueDate"
-                />
-                <SortItem
-                  onClick={() => sortTask("descending-low")}
-                  text="Date Descending"
-                  sortBy="dueDate"
-                />
-              </motion.div>
+              <SortTask />
+              // <motion.div
+              //   ref={divRef}
+              //   initial={{ y: 15 }}
+              //   animate={{ y: 0 }}
+              //   transition={{ duration: 0.5 }}
+              //   className="bg-opacity-50 w-52 h-96 rounded-xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
+              // >
+              //   <SortItem
+              //     onClick={() => sortTask("default")}
+              //     text="Default"
+              //     sortBy="default"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("priority-high")}
+              //     text="Top Priority"
+              //     sortBy="priority"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("priority-low")}
+              //     text="Low Priority"
+              //     sortBy="priority"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("complexity-high")}
+              //     text="Most Complex"
+              //     sortBy="complexity"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("complexity-low")}
+              //     text="Least Complex"
+              //     sortBy="complexity"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("ascending-high")}
+              //     text="Date Ascending"
+              //     sortBy="dueDate"
+              //   />
+              //   <SortItem
+              //     onClick={() => sortTask("descending-low")}
+              //     text="Date Descending"
+              //     sortBy="dueDate"
+              //   />
+              // </motion.div>
             )}
           </div>
         </div>
@@ -288,6 +291,7 @@ const Home = () => {
               key={task.id}
               style={{
                 background: task.completed ? "#1da1f2" : "rgb(1,1,1,0.3)",
+                color: task.completed ? "#000517" : "#E1E1E1",
               }}
               className="p-4 rounded-2xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
             >
@@ -297,11 +301,9 @@ const Home = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <strong
+                    className="cursor-pointer text-lg"
                     style={{
                       fontWeight: task.completed ? 400 : 300,
-                      color: task.completed ? "#000517" : "#E1E1E1",
-                      fontSize: "20px",
-                      cursor: "pointer",
                     }}
                   >
                     {task.value}
@@ -360,7 +362,6 @@ const Home = () => {
 
               <div
                 style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
                   fontWeight: 400,
                 }}
               >
@@ -368,7 +369,6 @@ const Home = () => {
               </div>
               <div
                 style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
                   fontWeight: 400,
                 }}
               >
@@ -377,11 +377,8 @@ const Home = () => {
 
               <div
                 // className={`text-gray-300 font-normal ${ifDueToday(task.date)}`}
-                className={`text-gray-300 font-normal ${
-                  isToday(new Date(task.date)) ? "text-red-500" : ""
-                }`}
+                className={`font-normal ${ifDueToday()}`}
                 style={{
-                  color: task.completed ? "#000517" : "#E1E1E1",
                   fontWeight: task.completed ? 400 : 300,
                   fontSize: "15px",
                 }}
