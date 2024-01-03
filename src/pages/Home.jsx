@@ -43,12 +43,31 @@ const Home = () => {
     );
   };
 
+  // const ifDueToday = (dueDate) => {
+  //   const formattedDueDate = new Date(dueDate);
+  //   if (formattedDueDate) {
+  //     return isToday(formattedDueDate) ? "text-red-500" : "text-green-500";
+  //   } else {
+  //     return null;
+  //   }
+  // };
+
   const ifDueToday = (dueDate) => {
-    const formattedDueDate = new Date(dueDate);
-    if (formattedDueDate) {
-      return isToday(formattedDueDate) ? "text-red-500" : "text-green-500";
-    } else {
+    if (!dueDate) {
       return null;
+    }
+
+    const formattedDueDate = new Date(dueDate);
+    const today = new Date();
+    const differenceInTime = formattedDueDate.getTime() - today.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    if (isToday(formattedDueDate)) {
+      return "text-red-500";
+    } else if (differenceInDays <= 3 && differenceInDays > 0) {
+      return "text-orange-500";
+    } else {
+      return "text-green-500";
     }
   };
 
