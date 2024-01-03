@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
-import SortItem from "../components/SortItem/SortItem";
+import SortItem from "../components/SortItem";
 
 const SortTask = () => {
   const divRef = useRef(null);

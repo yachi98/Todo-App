@@ -46,7 +46,6 @@ const Home = () => {
   const ifDueToday = (dueDate) => {
     const formattedDueDate = new Date(dueDate);
     if (formattedDueDate) {
-      console.log(formattedDueDate, "correct");
       return isToday(formattedDueDate) ? "text-red-500" : "text-green-500";
     } else {
       return null;
@@ -327,8 +326,7 @@ const Home = () => {
               </div>
 
               <div
-                // className={`text-gray-300 font-normal ${ifDueToday(task.date)}`}
-                className={`font-normal ${ifDueToday()}`}
+                className={`font-normal ${ifDueToday(task.date)}`}
                 style={{
                   fontWeight: task.completed ? 400 : 300,
                   fontSize: "15px",

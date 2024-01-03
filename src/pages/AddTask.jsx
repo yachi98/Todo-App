@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Buttons from "../components/Buttons/Buttons";
+import Buttons from "../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { useTodo } from "../context/TaskContext";
