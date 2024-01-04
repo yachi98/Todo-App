@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import Buttons from "../components/Buttons";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useTodo } from "../context/TaskContext";
 
 const EditTask = () => {
@@ -14,6 +14,7 @@ const EditTask = () => {
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
@@ -37,7 +38,8 @@ const EditTask = () => {
       setNoTaskAdded(true);
       return;
     }
-    updateTask(tasks, value, priority, complexity, addTask);
+    updateTask(id, value, priority, complexity);
+    navigate("/");
   };
 
   const handlePriorityChange = (value) => {

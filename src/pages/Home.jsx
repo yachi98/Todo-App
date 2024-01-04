@@ -43,15 +43,6 @@ const Home = () => {
     );
   };
 
-  // const ifDueToday = (dueDate) => {
-  //   const formattedDueDate = new Date(dueDate);
-  //   if (formattedDueDate) {
-  //     return isToday(formattedDueDate) ? "text-red-500" : "text-green-500";
-  //   } else {
-  //     return null;
-  //   }
-  // };
-
   const ifDueToday = (dueDate) => {
     if (!dueDate) {
       return null;
@@ -102,7 +93,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-4 min-w-[35rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
+          className="px-4 min-w-[30rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}
@@ -132,7 +123,11 @@ const Home = () => {
               Sort
             </button>
 
-            {showFilters && <SortTask />}
+            {showFilters && (
+              <div ref={divRef}>
+                <SortTask />
+              </div>
+            )}
           </div>
         </div>
       </div>

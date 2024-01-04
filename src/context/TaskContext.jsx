@@ -44,9 +44,21 @@ export const TaskProvider = ({ children }) => {
     searchValue(e.target.value);
   };
 
-  const updateTask = (taskId, updatedValue) => {
+  const updateTask = (
+    taskId,
+    updatedValue,
+    updatedPriority,
+    updatedComplexity
+  ) => {
     const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, value: updatedValue } : task
+      task.id === taskId
+        ? {
+            ...task,
+            value: updatedValue,
+            priority: updatedPriority,
+            complexity: updatedComplexity,
+          }
+        : task
     );
     setTasks(updatedTasks);
     setEditTaskId(null);

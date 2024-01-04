@@ -1,15 +1,13 @@
 import { motion } from "framer-motion";
-import { useRef, useContext } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { TaskContext } from "../context/TaskContext";
 import SortItem from "../components/SortItem";
 
 const SortTask = () => {
-  const divRef = useRef(null);
   const { sortTask } = useContext(TaskContext);
 
   return (
     <motion.div
-      ref={divRef}
       initial={{ y: 15 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
