@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Buttons from "../components/Buttons";
+// import SubTask from "../components/SubTask";
 import { Link, useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { useTodo } from "../context/TaskContext";
@@ -116,52 +117,17 @@ const AddTask = () => {
       <div style={{ marginTop: "35px" }}>
         <Link
           to="/"
-          style={{
-            textDecoration: "none",
-            background: "black",
-            padding: "10px",
-            borderRadius: "10px",
-            color: "white",
-          }}
+          className="decoration-none bg-black p-10 text-white rounded-xl"
         >
           Home
         </Link>
       </div>
       <div style={{ marginTop: "70px" }}>
-        <h3
-          style={{
-            fontSize: "22px",
-            color: "#DEDEDE",
-            fontWeight: 300,
-          }}
-        >
-          Add Task
-        </h3>
-        <form
-          style={{ display: "flex", flexDirection: "column", gap: "30px" }}
-          onSubmit={handleSubmit}
-        >
-          <label
-            style={{
-              fontSize: "20px",
-              color: "#DEDEDE",
-              fontWeight: 300,
-            }}
-          >
-            Task name
-          </label>
+        <h3 className="text-22 text-gray-300 font-light">Add Task</h3>
+        <form className="flex flex-col gap-30" onSubmit={handleSubmit}>
+          <label className="text-22 text-gray-300 font-light">Task name</label>
           <input
-            style={{
-              maxWidth: "550px",
-              background: "rgb(29, 161, 242, 0.1)",
-              border: "none",
-              padding: "10px",
-              color: "#DEDEDE",
-              fontWeight: 300,
-              borderRadius: "10px",
-              fontSize: "15px",
-              outline: "none",
-            }}
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-10 text-gray-300 font-light rounded-lg text-base outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -171,125 +137,47 @@ const AddTask = () => {
           />
         </form>
         {noTaskAdded && (
-          <div
-            style={{
-              color: "#EE4D4D",
-              marginTop: "10px",
-              fontWeight: 300,
-              fontSize: "20px",
-            }}
-          >
+          <div className="text-red-500 mt-4 font-light text-lg">
             No task added
           </div>
         )}
 
-        <h3
-          style={{
-            fontSize: "20px",
-            color: "#DEDEDE",
-            fontWeight: 300,
-            marginTop: "40px",
-          }}
-        >
-          Priority
-        </h3>
-        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+        <h3 className="text-lg text-gray-300 font-light mt-10">Priority</h3>
+        <div className="flex gap-5 mt-5">
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
           />
         </div>
-        <h3
-          style={{
-            fontSize: "20px",
-            color: "#DEDEDE",
-            fontWeight: 300,
-            marginTop: "40px",
-          }}
-        >
-          Complexity
-        </h3>
-        <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+        <h3 className="text-lg text-gray-300 font-light mt-10">Complexity</h3>
+        <div className="flex gap-5 mt-5">
           <Buttons
             selectedValues={complexity}
             clickedBtn={handleComplexityChange}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "30px",
-            marginTop: "30px",
-          }}
-        >
+        <div className="flex flex-col gap-8 mt-8">
           <label
-            style={{
-              fontSize: "20px",
-              color: "#DEDEDE",
-              fontWeight: 300,
-            }}
+            className="text-lg text-gray-300 font-light"
             htmlFor="task-date"
           >
             Due Date:
           </label>
-          <form
-            style={{
-              background: "rgb(29, 161, 242, 0.1)",
-              maxWidth: "550px",
-              borderRadius: "10px",
-            }}
-          >
+          <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              style={{
-                background: "none",
-                border: "none",
-                padding: "10px",
-                color: "#DEDEDE",
-                borderRadius: "10px",
-                fontSize: "15px",
-                fontWeight: 300,
-                outline: "none",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
+              className="bg-transparent border-none p-4 text-gray-300 rounded-md text-base font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
             />
           </form>
-          <div
-            style={{
-              display: "flex",
-              //   alignItems: "center",
-              flexDirection: "column",
-              gap: "30px",
-            }}
-          >
-            <label
-              style={{
-                fontSize: "20px",
-                color: "#DEDEDE",
-                fontWeight: 300,
-              }}
-            >
+          <div className="flex flex-col gap-8">
+            <label className="text-base text-gray-300 font-light">
               Sub task
             </label>
-            <div style={{ flex: 1, display: "flex" }}>
+            <div className="flex flex-1">
               <input
-                style={{
-                  flex: 1,
-                  maxWidth: "450px",
-                  background: "rgb(29, 161, 242, 0.1)",
-                  border: "none",
-                  padding: "10px",
-                  color: "#DEDEDE",
-                  fontWeight: 300,
-                  borderRadius: "10px",
-                  fontSize: "15px",
-                  outline: "none",
-                  marginRight: "10px", // Adjust margin as needed
-                }}
+                className="flex-1 max-w-450px bg-blue-400 bg-opacity-10 border-none p-4 text-gray-300 font-light rounded-lg text-base outline-none mr-4"
                 value={subTask}
                 onChange={handleSubTaskChange}
                 ref={inputRef2}
@@ -298,16 +186,7 @@ const AddTask = () => {
                 placeholder="Add Task..."
               />
               <button
-                style={{
-                  background: "rgb(29, 161, 242, 0.1)",
-                  color: "#DEDEDE",
-                  border: "none",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                  fontSize: "15px",
-                  fontWeight: 300,
-                  cursor: "pointer",
-                }}
+                className="bg-blue-400 bg-opacity-10 text-gray-300 border-none p-2 md:p-4 rounded-lg text-base md:text-sm font-light cursor-pointer"
                 onClick={handleAddSubTask}
               >
                 Add
@@ -315,18 +194,11 @@ const AddTask = () => {
             </div>
             <ul style={{ marginTop: "-30px" }}>
               {subTasksList.map((task, index) => (
+                // <SubTask key={index} />
                 <li
+                  className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-10 text-white flex justify-between"
                   style={{
-                    listStyle: "none",
-                    background: "rgb(29, 161, 242, 0.1)",
-                    borderRadius: "10px",
-                    marginTop: "10px",
-                    maxWidth: "450px",
-                    padding: "10px",
-                    color: "white",
                     textDecoration: task.isCompleted ? "line-through" : "none",
-                    display: "flex",
-                    justifyContent: "space-between",
                   }}
                   key={index}
                 >
@@ -372,20 +244,10 @@ const AddTask = () => {
         </div>
       </div>
 
-      <div style={{ marginTop: "50px", fontWeight: 300 }}>
+      <div className="mt-16 font-light">
         <Link to="/" style={{ textDecoration: "none" }}>
           <button
-            style={{
-              color: "grey",
-              background: "none",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "20px",
-              fontWeight: 300,
-              transition: "background-color 0.2s ease",
-            }}
+            className="text-gray-500 bg-transparent py-2 px-4 rounded-lg border-none cursor-pointer text-lg font-light transition duration-200 ease-in-out"
             onMouseEnter={(e) => {
               e.target.style.background = "#7FDBFF";
               e.target.style.color = "#000517";
