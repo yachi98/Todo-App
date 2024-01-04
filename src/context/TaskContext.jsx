@@ -13,7 +13,6 @@ export const TaskProvider = ({ children }) => {
   const [subTasksList, setSubTasks] = useState([]);
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
-  const [editTaskId, setEditTaskId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -48,7 +47,8 @@ export const TaskProvider = ({ children }) => {
     taskId,
     updatedValue,
     updatedPriority,
-    updatedComplexity
+    updatedComplexity,
+    updatedDate
   ) => {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId
@@ -57,11 +57,11 @@ export const TaskProvider = ({ children }) => {
             value: updatedValue,
             priority: updatedPriority,
             complexity: updatedComplexity,
+            dueDate: updatedDate,
           }
         : task
     );
     setTasks(updatedTasks);
-    setEditTaskId(null);
   };
 
   const getTask = (taskId) => {
