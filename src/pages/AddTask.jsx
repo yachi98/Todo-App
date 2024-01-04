@@ -112,17 +112,7 @@ const AddTask = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100vh",
-        background: "rgb(1,1,1,0.5)",
-        backdropFilter: " blur(10px)",
-        padding: "10px 20px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <div className="w-full h-screen bg-opacity-50 bg-black backdrop-blur-md p-10 md:p-20 flex justify-center">
       <div style={{ marginTop: "35px" }}>
         <Link
           to="/"
