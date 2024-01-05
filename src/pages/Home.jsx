@@ -237,8 +237,8 @@ const Home = () => {
             </div>
 
             <div
+              className={`font-normal ${ifDueToday(highestPriorityTask.date)}`}
               style={{
-                color: highestPriorityTask.completed ? "#000517" : "#E1E1E1",
                 fontWeight: highestPriorityTask.completed ? 400 : 300,
                 fontSize: "15px",
               }}

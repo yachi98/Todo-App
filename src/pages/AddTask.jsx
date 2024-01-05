@@ -117,7 +117,7 @@ const AddTask = () => {
       <div style={{ marginTop: "35px" }}>
         <Link
           to="/"
-          className="decoration-none bg-black p-10 text-white rounded-xl"
+          className="decoration-none bg-black p-3 text-white rounded-xl"
         >
           Home
         </Link>
@@ -127,7 +127,7 @@ const AddTask = () => {
         <form className="flex flex-col gap-30" onSubmit={handleSubmit}>
           <label className="text-22 text-gray-300 font-light">Task name</label>
           <input
-            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-10 text-gray-300 font-light rounded-lg text-base outline-none"
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-3 text-gray-300 font-light rounded-lg text-base outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -177,7 +177,7 @@ const AddTask = () => {
             </label>
             <div className="flex flex-1">
               <input
-                className="flex-1 max-w-450px bg-blue-400 bg-opacity-10 border-none p-4 text-gray-300 font-light rounded-lg text-base outline-none mr-4"
+                className="flex-1 max-w-450px bg-blue-400 bg-opacity-10 border-none py-2 px-4 text-gray-300 font-light rounded-lg text-base outline-none mr-4"
                 value={subTask}
                 onChange={handleSubTaskChange}
                 ref={inputRef2}
@@ -193,10 +193,10 @@ const AddTask = () => {
               </button>
             </div>
             <ul style={{ marginTop: "-30px" }}>
+              {/* <SubTask key={index} /> */}
               {subTasksList.map((task, index) => (
-                // <SubTask key={index} />
                 <li
-                  className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-10 text-white flex justify-between"
+                  className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
                   style={{
                     textDecoration: task.isCompleted ? "line-through" : "none",
                   }}

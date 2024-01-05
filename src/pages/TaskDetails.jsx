@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTodo } from "../context/TaskContext";
+import { motion } from "framer-motion";
 import React from "react";
 
 const TaskDetails = () => {
@@ -9,6 +10,22 @@ const TaskDetails = () => {
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
+
+  const progress = Math.floor(
+    (task.subTasksList.filter((item) => item.isCompleted === true).length /
+      task.subTasksList.length) *
+      100
+  );
+
+  // let progress = 0;
+  // if (task && task.checklist && task.checklist.length > 0) {
+  //   const completedCount = task.checklist.filter(
+  //     (item) => item.isCompleted
+  //   ).length;
+  //   progress = Math.floor((completedCount / task.checklist.length) * 100);
+  // }
+
+  console.log(progress);
 
   return (
     <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
@@ -64,10 +81,30 @@ const TaskDetails = () => {
         <span className="text-white">Due date: {task.date}</span>
         <span className="text-white">Subtask Checklist {task.subValue}</span>
         {task.subTasksList.map((subTask, index) => (
-          <span className="text-white" key={index}>
+          <span
+            className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
+            key={index}
+          >
             {subTask.name}
           </span>
         ))}
+        {task.subTasksList.length > 0 && (
+          <div>
+            <p className="text-white">Progress</p>
+            <div className="w-full h-1 relative my-1">
+              <span
+                className={`w-full h-1 absolute right-0 top-0 rounded-sm opacity-20`}
+              ></span>
+              <motion.span
+                className={`rounded-sm h-1 block bg-red-500 opacity-100 relative`}
+                initial={{ width: "0%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5 }}
+              ></motion.span>
+            </div>
+            <p className="float-right text-white">{progress}%</p>
+          </div>
+        )}
       </div>
     </div>
   );

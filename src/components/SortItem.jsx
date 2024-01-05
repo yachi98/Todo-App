@@ -2,20 +2,7 @@ const SortItem = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
-      style={{
-        paddingTop: "10px",
-        padding: "10px",
-        marginTop: "5px",
-        margin: "5px 10px",
-        borderRadius: "10px",
-        cursor: "pointer",
-        background: "none",
-        color: "white",
-        border: "none",
-        fontSize: "15px",
-        transition: "background-color 0.2s ease",
-        textAlign: "left",
-      }}
+      class="pt-1 px-1 mt-6 mx-4 rounded-lg cursor-pointer bg-transparent text-white border-none text-base transition duration-200 ease-in-out text-left"
       onMouseEnter={(e) => {
         e.target.style.background = "white";
         e.target.style.color = "black";

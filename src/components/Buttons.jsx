@@ -14,18 +14,14 @@ const Buttons = (props) => {
     <>
       {numbers.map((num) => (
         <button
+          class="rounded-lg border border-transparent bg-opacity-10 cursor-pointer text-gray-400 text-base font-light"
           style={{
             padding: "8px 16px",
-            borderRadius: "10px",
             background:
               props.selectedValues === num
                 ? "#1da1f2"
                 : "rgba(255, 255, 255, 0.1)",
             color: selectedButton === num ? "#DEDEDE" : "grey",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "16px",
-            fontWeight: 300,
           }}
           onClick={() => handleButtonClick(num)}
           key={num}
