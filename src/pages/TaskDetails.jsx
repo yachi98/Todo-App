@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTodo } from "../context/TaskContext";
+
 import { motion } from "framer-motion";
 import React from "react";
 
@@ -10,22 +11,34 @@ const TaskDetails = () => {
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
+  const [subTasksList, setSubTasksList] = useState([]);
 
-  const progress = Math.floor(
-    (task.subTasksList.filter((item) => item.isCompleted === true).length /
-      task.subTasksList.length) *
-      100
-  );
+  const calculateProgress = (subTasksList) => {
+    if (subTasksList.length === 0) {
+      return 0;
+    }
 
-  // let progress = 0;
-  // if (task && task.checklist && task.checklist.length > 0) {
-  //   const completedCount = task.checklist.filter(
-  //     (item) => item.isCompleted
-  //   ).length;
-  //   progress = Math.floor((completedCount / task.checklist.length) * 100);
-  // }
+    const completedCount = subTasksList.filter(
+      (item) => item.isCompleted
+    ).length;
+    const progress = Math.floor((completedCount / subTasksList.length) * 100);
+    return progress;
+  };
 
-  console.log(progress);
+  const removeSubTask = (subTask) => {
+    const newList = subTasksList.filter((element) => element.id !== subTask);
+    setSubTasksList(newList);
+  };
+
+  const checkSubTask = (id) => {
+    const newList = subTasksList.map((element) => {
+      if (element.id === id) {
+        element.isCompleted = !element.isCompleted;
+      }
+      return element;
+    });
+    setSubTasksList(newList);
+  };
 
   return (
     <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
@@ -81,14 +94,51 @@ const TaskDetails = () => {
         <span className="text-white">Due date: {task.date}</span>
         <span className="text-white">Subtask Checklist {task.subValue}</span>
         {task.subTasksList.map((subTask, index) => (
-          <span
+          <li
             className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
+            style={{
+              textDecoration: subTask.isCompleted ? "line-through" : "none",
+            }}
             key={index}
           >
+            <svg
+              onClick={() => checkSubTask(subTask.id)}
+              style={{ color: "white", width: "20px", cursor: "pointer" }}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              dataSlot="icon"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+
             {subTask.name}
-          </span>
+            <svg
+              onClick={() => removeSubTask(subTask.id)}
+              style={{ color: "white", width: "20px", cursor: "pointer" }}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+              />
+            </svg>
+          </li>
         ))}
-        {task.subTasksList.length > 0 && (
+        {task.subTasksList && (
           <div>
             <p className="text-white">Progress</p>
             <div className="w-full h-1 relative my-1">
@@ -98,11 +148,13 @@ const TaskDetails = () => {
               <motion.span
                 className={`rounded-sm h-1 block bg-red-500 opacity-100 relative`}
                 initial={{ width: "0%" }}
-                animate={{ width: `${progress}%` }}
+                animate={{ width: `${calculateProgress(task.subTasksList)}%` }}
                 transition={{ duration: 0.5 }}
               ></motion.span>
             </div>
-            <p className="float-right text-white">{progress}%</p>
+            <p className="float-right text-white">
+              {calculateProgress(task.subTasksList)}%
+            </p>
           </div>
         )}
       </div>

@@ -14,7 +14,7 @@ const Buttons = (props) => {
     <>
       {numbers.map((num) => (
         <button
-          class="rounded-lg border border-transparent bg-opacity-10 cursor-pointer text-gray-400 text-base font-light"
+          className="rounded-lg border border-transparent bg-opacity-10 cursor-pointer text-gray-400 text-base font-light"
           style={{
             padding: "8px 16px",
             background:

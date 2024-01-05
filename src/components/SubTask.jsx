@@ -1,22 +1,14 @@
 const SubTask = () => {
   return (
     <li
+      className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
       style={{
-        listStyle: "none",
-        background: "rgb(29, 161, 242, 0.1)",
-        borderRadius: "10px",
-        marginTop: "10px",
-        maxWidth: "450px",
-        padding: "10px",
-        color: "white",
-        textDecoration: task.isCompleted ? "line-through" : "none",
-        display: "flex",
-        justifyContent: "space-between",
+        textDecoration: subTask.isCompleted ? "line-through" : "none",
       }}
       key={index}
     >
       <svg
-        onClick={() => checkSubTask(task.id)}
+        onClick={() => checkSubTask(subTask.id)}
         style={{ color: "white", width: "20px", cursor: "pointer" }}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -33,9 +25,9 @@ const SubTask = () => {
         />
       </svg>
 
-      {task.name}
+      {subTask.name}
       <svg
-        onClick={() => removeSubTask(task.id)}
+        onClick={() => removeSubTask(subTask.id)}
         style={{ color: "white", width: "20px", cursor: "pointer" }}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

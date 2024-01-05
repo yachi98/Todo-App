@@ -10,6 +10,7 @@ const AddTask = () => {
   const inputRef2 = useRef(null);
   const [value, setValue] = useState("");
   const [complexity, setComplexity] = useState(null);
+
   const [priority, setPriority] = useState(null);
   const [dueDate, setDueDate] = useState(Date || null);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
@@ -192,18 +193,19 @@ const AddTask = () => {
                 Add
               </button>
             </div>
-            <ul style={{ marginTop: "-30px" }}>
-              {/* <SubTask key={index} /> */}
-              {subTasksList.map((task, index) => (
+            <ul>
+              {subTasksList.map((subTask, index) => (
                 <li
                   className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
                   style={{
-                    textDecoration: task.isCompleted ? "line-through" : "none",
+                    textDecoration: subTask.isCompleted
+                      ? "line-through"
+                      : "none",
                   }}
                   key={index}
                 >
                   <svg
-                    onClick={() => checkSubTask(task.id)}
+                    onClick={() => checkSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -220,9 +222,9 @@ const AddTask = () => {
                     />
                   </svg>
 
-                  {task.name}
+                  {subTask.name}
                   <svg
-                    onClick={() => removeSubTask(task.id)}
+                    onClick={() => removeSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
