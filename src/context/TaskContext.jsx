@@ -2,7 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 
 export const TaskContext = createContext();
 
-export function useTodo() {
+export function useTask() {
   const value = useContext(TaskContext);
   return value;
 }
@@ -10,7 +10,6 @@ export function useTodo() {
 export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
-  const [subTasksList, setSubTasks] = useState([]);
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
 
@@ -34,9 +33,14 @@ export const TaskProvider = ({ children }) => {
     setTasks(newTask);
   };
 
-  const removeTask = (task) => {
-    const newList = tasks.filter((element) => element.id !== task);
+  const removeTask = (taskId) => {
+    const newList = tasks.filter((element) => element.id !== taskId);
     setTasks(newList);
+  };
+
+  const removeSubTask = (subTaskId) => {
+    const newList = subTasksList.filter((element) => element.id !== subTaskId);
+    setSubTasksList(newList);
   };
 
   const handleTask = (e) => {
@@ -48,7 +52,8 @@ export const TaskProvider = ({ children }) => {
     updatedValue,
     updatedPriority,
     updatedComplexity,
-    updatedDate
+    updatedDate,
+    updatedSubTasks
   ) => {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId
@@ -58,6 +63,7 @@ export const TaskProvider = ({ children }) => {
             priority: updatedPriority,
             complexity: updatedComplexity,
             dueDate: updatedDate,
+            subTasks: updatedSubTasks,
           }
         : task
     );
@@ -119,9 +125,9 @@ export const TaskProvider = ({ children }) => {
         removeTask,
         handleTask,
         sortTask,
-        subTasksList,
         getTask,
         updateTask,
+        removeSubTask,
         value,
       }}
     >

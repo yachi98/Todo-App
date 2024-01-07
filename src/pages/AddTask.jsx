@@ -1,22 +1,22 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Buttons from "../components/Buttons";
-// import SubTask from "../components/SubTask";
 import { Link, useNavigate } from "react-router-dom";
 import { uid } from "uid";
-import { useTodo } from "../context/TaskContext";
+import { TaskContext } from "../context/TaskContext";
+import { useTask } from "../context/TaskContext";
 
 const AddTask = () => {
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState("");
   const [complexity, setComplexity] = useState(null);
-
   const [priority, setPriority] = useState(null);
   const [dueDate, setDueDate] = useState(Date || null);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
-  const myContext = useTodo();
+  const myContext = useTask();
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState([]);
+  // const { removeSubTask } = useContext(TaskContext);
   const navigate = useNavigate();
 
   const handleInputFocus = () => {
@@ -57,7 +57,7 @@ const AddTask = () => {
       complexity,
       date: dueDate,
       id: uid(),
-      subTasksList,
+      subTasksList: subTasksList,
     };
     myContext.addTask(item);
     console.log(item);
@@ -98,9 +98,8 @@ const AddTask = () => {
     }
   };
 
-  const removeSubTask = (subTask) => {
-    const newList = subTasksList.filter((element) => element.id !== subTask);
-    setSubTasksList(newList);
+  const handleRemoveSubTask = (subTaskId) => {
+    removeSubTask(subTaskId);
   };
 
   const checkSubTask = (id) => {
@@ -224,7 +223,7 @@ const AddTask = () => {
 
                   {subTask.name}
                   <svg
-                    onClick={() => removeSubTask(subTask.id)}
+                    onClick={() => handleRemoveSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

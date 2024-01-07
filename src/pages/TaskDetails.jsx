@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useTodo } from "../context/TaskContext";
+import { useTask } from "../context/TaskContext";
 
 import { motion } from "framer-motion";
 import React from "react";
 
 const TaskDetails = () => {
-  const { getTask, removeTask } = useTodo();
+  const { getTask, removeTask } = useTask();
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
-  const [subTasksList, setSubTasksList] = useState([]);
+  // const [subTasksList, setSubTasksList] = useState([]);
 
   const calculateProgress = (subTasksList) => {
     if (subTasksList.length === 0) {
@@ -25,8 +25,9 @@ const TaskDetails = () => {
     return progress;
   };
 
-  const removeSubTask = (subTask) => {
-    const newList = subTasksList.filter((element) => element.id !== subTask);
+  const removeSubTask = (subTaskId) => {
+    const newList = subTasksList.filter((element) => element.id !== subTaskId);
+    console.log(newList);
     setSubTasksList(newList);
   };
 
@@ -138,7 +139,7 @@ const TaskDetails = () => {
             </svg>
           </li>
         ))}
-        {task.subTasksList && (
+        {task.subTasksList.length > 0 && (
           <div>
             <p className="text-white">Progress</p>
             <div className="w-full h-1 relative my-1">

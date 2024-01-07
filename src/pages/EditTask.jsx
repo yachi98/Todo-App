@@ -1,19 +1,19 @@
 import { useState, useRef } from "react";
 import Buttons from "../components/Buttons";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useTodo } from "../context/TaskContext";
+import { useTask } from "../context/TaskContext";
 
 const EditTask = () => {
-  const { tasks, getTask, updateTask, addTask } = useTodo();
+  const { getTask, updateTask, removeSubTask } = useTask();
   const { id } = useParams();
   const task = getTask(id);
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState(task.value);
-  const [dueDate, setDueDate] = useState(task.date);
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
-  const [subTasksList, setSubTasksList] = useState(task.subTasks);
+  const [dueDate, setDueDate] = useState(task.date);
+  const [subTasksList, setSubTasksList] = useState(task.subTasks || []);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const navigate = useNavigate();
 
@@ -137,17 +137,19 @@ const EditTask = () => {
                 Add
               </button>
             </div>
-            {/* <ul style={{ marginTop: "-30px" }}>
-              {subTasksList.map((task, index) => (
+            <ul style={{ marginTop: "-30px" }}>
+              {task.subTasksList.map((subTask, index) => (
                 <li
                   className="list-none bg-blue-400 bg-opacity-10 rounded-lg mt-10 max-w-450 p-3 text-white flex justify-between"
                   style={{
-                    textDecoration: task.isCompleted ? "line-through" : "none",
+                    textDecoration: subTask.isCompleted
+                      ? "line-through"
+                      : "none",
                   }}
                   key={index}
                 >
                   <svg
-                    onClick={() => checkSubTask(task.id)}
+                    onClick={() => checkSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -164,9 +166,9 @@ const EditTask = () => {
                     />
                   </svg>
 
-                  {task.name}
+                  {subTask.name}
                   <svg
-                    onClick={() => removeSubTask(task.id)}
+                    onClick={() => removeSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -183,7 +185,7 @@ const EditTask = () => {
                   </svg>
                 </li>
               ))}
-            </ul> */}
+            </ul>
           </div>
         </div>
       </div>
