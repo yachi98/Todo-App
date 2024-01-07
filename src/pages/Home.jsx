@@ -93,7 +93,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-4 min-w-[30rem] my-5 rounded-lg text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
+          className="px-4 min-w-[30rem] my-5 rounded-2xl text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}
@@ -104,12 +104,12 @@ const Home = () => {
         <div className="flex">
           <Link
             to="/task/add"
-            className="m-5 p-2 rounded-lg border-none bg-white cursor-pointer no-underline text-black text-base"
+            className="m-5 p-2 rounded-2xl border-none bg-white cursor-pointer no-underline text-black text-base"
           >
             Add Task
           </Link>
           <button
-            className="m-5 p-2 rounded-lg border-none cursor-pointer text-white text-base transition duration-200 ease-in-out"
+            className="m-5 p-2 rounded-2xl border-none cursor-pointer text-white text-base transition duration-200 ease-in-out"
             style={{ backgroundColor }}
             onClick={handlePower}
           >
@@ -118,7 +118,7 @@ const Home = () => {
           <div>
             <button
               onClick={handleClick}
-              className="text-white font-light text-base mt-5 p-2 w-24 bg-black rounded-lg border-none cursor-pointer"
+              className="text-white font-light text-base mt-5 p-2 w-24 bg-black rounded-2xl border-none cursor-pointer"
             >
               Sort
             </button>
@@ -158,7 +158,7 @@ const Home = () => {
               >
                 <strong
                   style={{
-                    fontWeight: highestPriorityTask.completed ? 400 : 300,
+                    fontWeight: 300,
                     color: highestPriorityTask.completed
                       ? "#000517"
                       : "#E1E1E1",

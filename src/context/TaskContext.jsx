@@ -38,11 +38,6 @@ export const TaskProvider = ({ children }) => {
     setTasks(newList);
   };
 
-  const removeSubTask = (subTaskId) => {
-    const newList = subTasksList.filter((element) => element.id !== subTaskId);
-    setSubTasksList(newList);
-  };
-
   const handleTask = (e) => {
     searchValue(e.target.value);
   };
@@ -127,7 +122,6 @@ export const TaskProvider = ({ children }) => {
         sortTask,
         getTask,
         updateTask,
-        removeSubTask,
         value,
       }}
     >

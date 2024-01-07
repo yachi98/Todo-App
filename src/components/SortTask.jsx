@@ -11,7 +11,7 @@ const SortTask = () => {
       initial={{ y: 15 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-opacity-50 w-52 h-96 rounded-xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
+      className="bg-black bg-opacity-40 w-52 h-96 rounded-3xl absolute top-20 z-50 flex flex-col backdrop-filter backdrop-blur-md"
     >
       <SortItem
         onClick={() => sortTask("default")}
