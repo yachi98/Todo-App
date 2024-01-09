@@ -41,22 +41,55 @@ const TaskDetails = () => {
     setSubTasksList(newList);
   };
 
+  const isToday = (dueDate) => {
+    if (!dueDate) {
+      return false;
+    }
+    const today = new Date();
+    return (
+      dueDate.getDate() === today.getDate() &&
+      dueDate.getMonth() === today.getMonth() &&
+      dueDate.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const ifDueToday = (dueDate) => {
+    if (!dueDate) {
+      return null;
+    }
+
+    const formattedDueDate = new Date(dueDate);
+    const today = new Date();
+    const differenceInTime = formattedDueDate.getTime() - today.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    if (isToday(formattedDueDate)) {
+      return "text-red-500";
+    } else if (differenceInDays <= 3 && differenceInDays > 0) {
+      return "text-orange-500";
+    } else {
+      return "text-green-500";
+    }
+  };
+
   return (
     <div className="w-full min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-md p-2 md:p-4">
       <div className="w-1/3">
         <div className="mt-9 gap-5 items-center">
-          <Link
-            to="/"
-            className="no-underline text-white bg-black py-2 px-4 rounded-2xl"
-          >
-            Home
-          </Link>
-          <div className="text-white text-2xl mb-8">{value}</div>
+          <div className="mb-10">
+            <Link
+              to="/"
+              className="no-underline text-white bg-black py-2 px-4 rounded-2xl"
+            >
+              Home
+            </Link>
+          </div>
+          <div className="text-white text-3xl mb-8">{value}</div>
           <div className="flex gap-10 mb-10">
-            <h2 className="text-white border-none p-2 rounded-2xl bg-blue-400 w-28">
+            <h2 className="text-white text-2xl border-none p-3 rounded-2xl bg-blue-400 w-44">
               Priority: {task.priority}
             </h2>
-            <h2 className="text-black border-none p-2 rounded-2xl bg-white w-36">
+            <h2 className="text-black text-2xl border-none p-3 rounded-2xl bg-white w-44">
               Complexity: {task.complexity}
             </h2>
             <Link to={`/task/edit/${task.id}`}>
@@ -95,9 +128,21 @@ const TaskDetails = () => {
             </Link>
           </div>
         </div>
-
-        <span className="text-white">Due date: {task.date}</span>
-        <span className="text-white">Subtask Checklist {task.subValue}</span>
+        <div className="flex flex-col">
+          <span
+            className={`font-normal bg-black bg-opacity-50 p-5 rounded-2xl mb-10 ${ifDueToday(
+              task.date
+            )}`}
+            style={{
+              fontSize: "25px",
+            }}
+          >
+            Due date: {task.date}
+          </span>
+          <span className="text-white text-2xl mb-8">
+            Subtask Checklist {task.subValue}
+          </span>
+        </div>
         {subTasksList.map((subTask, index) => (
           <li
             className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-3 text-white flex justify-between"
@@ -148,13 +193,13 @@ const TaskDetails = () => {
         ))}
         {subTasksList.length > 0 && (
           <div>
-            <p className="text-white">Progress</p>
             <div className="w-full h-1 relative my-1">
               <span
                 className={`w-full h-1 absolute right-0 top-0 rounded-sm opacity-20`}
               ></span>
+              <p className="text-white text-2xl mb-10">Progress</p>
               <motion.span
-                className={`rounded-sm h-1 block bg-red-500 opacity-100 relative`}
+                className={`rounded-sm h-1 block bg-blue-400 opacity-100 relative `}
                 initial={{ width: "0%" }}
                 animate={{
                   width: `${calculateProgress(task.subTasksList)}%`,
@@ -162,7 +207,7 @@ const TaskDetails = () => {
                 transition={{ duration: 0.5 }}
               ></motion.span>
             </div>
-            <p className="float-right text-white">
+            <p className="float-right text-white text-2xl">
               {calculateProgress(task.subTasksList)}%
             </p>
           </div>
