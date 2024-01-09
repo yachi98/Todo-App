@@ -11,7 +11,6 @@ export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
   const [value, searchValue] = useState("");
-  // const task = getTask(id);
   const [sort, setSort] = useState("");
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export const TaskProvider = ({ children }) => {
   const completeTask = (id) => {
     const completedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, completed: !task.completed };
+        return { ...task, isCompleted: !task.completed };
       }
       return task;
     });
@@ -37,10 +36,11 @@ export const TaskProvider = ({ children }) => {
   const checkSubTask = (taskId, subTaskId) => {
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
-        task.subtasks = task.subtasks.map((subTask) => {
+        task.subTasksList = task.subTasksList.map((subTask) => {
           if (subTask.id === subTaskId) {
-            subTask.completed = !subTask.completed;
+            subTask.isCompleted = !subTask.isCompleted;
           }
+
           return subTask;
         });
       }
@@ -50,10 +50,11 @@ export const TaskProvider = ({ children }) => {
     setTasks(newTasks);
   };
 
-  const removeSubtask = (taskId, subTaskId) => {
+  const removeSubTask = (taskId, subTaskId) => {
+    console.log("hi");
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
-        task.subtasks = task.subtasks.filter(
+        task.subTasksList = task.subTasksList.filter(
           (subTask) => subTask.id !== subTaskId
         );
       }
@@ -98,28 +99,17 @@ export const TaskProvider = ({ children }) => {
     return tasks.find((task) => task.id === taskId);
   };
 
-  // const filterByTags = (subTask) => {
-  //   if (subTask.task.subTasksList.length) {
-  //     if (subTask.subTasksList) {
-  //       return subTask.tags.some((subTask) =>
-  //         filterTags.includes(subTask.title)
-  //       );
-  //     }
-  //     return false;
-  //   }
-  //   return true;
-  // };
-
-  // const filteredTasks = tasks.filter((task) =>
-  //   task.value
-  //     .toLowerCase()
-  //     .includes(value.toLowerCase())
-  //     .filter((element) => filterByTags(element))
-  // );
-
   const filteredTasks = tasks.filter((task) =>
     task.value.toLowerCase().includes(value.toLowerCase())
   );
+
+  // const filteredTasks = tasks
+  //   .filter((task) => task.value.toLowerCase().includes(value.toLowerCase()))
+  //   .map((task) => {
+  //     const filteredSubtasks = task.subTasksList.filter((subtask) =>
+  //       subtask.name.toLowerCase().includes(value.toLowerCase())
+  //     );
+  //   });
 
   const sortTask = (sortBy) => {
     setSort(sortBy);
@@ -171,7 +161,7 @@ export const TaskProvider = ({ children }) => {
         getTask,
         updateTask,
         checkSubTask,
-        removeSubtask,
+        removeSubTask,
         value,
       }}
     >

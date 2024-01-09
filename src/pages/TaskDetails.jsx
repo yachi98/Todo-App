@@ -11,6 +11,7 @@ const TaskDetails = () => {
   const { id } = useParams();
   const task = getTask(id);
   const [value, setValue] = useState(task ? task.value : "");
+  const { checkSubTask, removeSubTask } = useTask();
   const [subTasksList, setSubTasksList] = useState(task.subTasksList || []);
 
   const calculateProgress = (subTasksList) => {
@@ -23,22 +24,6 @@ const TaskDetails = () => {
     ).length;
     const progress = Math.floor((completedCount / subTasksList.length) * 100);
     return progress;
-  };
-
-  const removeSubTask = (subTaskId) => {
-    const newList = subTasksList.filter((element) => element.id !== subTaskId);
-    console.log(newList);
-    setSubTasksList(newList);
-  };
-
-  const checkSubTask = (id) => {
-    const newList = task.subTasksList.map((element) => {
-      if (element.id === id) {
-        element.isCompleted = !element.isCompleted;
-      }
-      return element;
-    });
-    setSubTasksList(newList);
   };
 
   const isToday = (dueDate) => {
@@ -86,10 +71,10 @@ const TaskDetails = () => {
           </div>
           <div className="text-white text-3xl mb-8">{value}</div>
           <div className="flex gap-10 mb-10">
-            <h2 className="text-white text-2xl border-none p-3 rounded-2xl bg-blue-400 w-44">
+            <h2 className="text-white text-2xl border-none p-3 rounded-2xl bg-blue-400 w-52">
               Priority: {task.priority}
             </h2>
-            <h2 className="text-black text-2xl border-none p-3 rounded-2xl bg-white w-44">
+            <h2 className="text-black text-2xl border-none p-3 rounded-2xl bg-white w-52">
               Complexity: {task.complexity}
             </h2>
             <Link to={`/task/edit/${task.id}`}>
@@ -154,27 +139,29 @@ const TaskDetails = () => {
             }}
             key={index}
           >
-            <svg
-              onClick={() => checkSubTask(subTask.id)}
-              style={{ color: "white", width: "20px", cursor: "pointer" }}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              dataSlot="icon"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
+            <div className="flex items-center gap-5">
+              <svg
+                onClick={() => checkSubTask(task.id, subTask.id)}
+                style={{ color: "white", width: "20px", cursor: "pointer" }}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                dataSlot="icon"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
 
-            {subTask.name}
+              {subTask.name}
+            </div>
             <svg
-              onClick={() => removeSubTask(subTask.id)}
+              onClick={() => removeSubTask(task.id, subTask.id)}
               style={{ color: "white", width: "20px", cursor: "pointer" }}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

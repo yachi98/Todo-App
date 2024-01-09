@@ -138,7 +138,6 @@ const Home = () => {
 
       <ul className="list-none min-w-360 mt-8 flex flex-wrap gap-4">
         {isPowerMode && highestPriorityTask ? (
-          // <HighestValueTask />
           <motion.li
             initial={{ y: 35 }}
             animate={{ y: 0 }}

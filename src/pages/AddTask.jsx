@@ -8,7 +8,6 @@ const AddTask = () => {
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState("");
-  // const { checkSubTask } = useTask();
   const [complexity, setComplexity] = useState(null);
   const [priority, setPriority] = useState(null);
   const [dueDate, setDueDate] = useState(Date || null);
@@ -113,7 +112,9 @@ const AddTask = () => {
         </Link>
       </div>
       <div>
-        <h3 className="text-22 text-gray-300 font-light">Add Task</h3>
+        <h3 className="text-2xl text-gray-300 font-light mb-5 text-center">
+          Add Task
+        </h3>
         <form className="flex flex-col gap-30" onSubmit={handleSubmit}>
           <label className="text-22 text-gray-300 font-light mb-10">
             Task name
@@ -129,19 +130,19 @@ const AddTask = () => {
           />
         </form>
         {noTaskAdded && (
-          <div className="text-red-500 mt-4 font-light text-lg">
+          <div className="text-red-500 mt-4 font-light text-22">
             No task added
           </div>
         )}
 
-        <h3 className="text-lg text-gray-300 font-light mt-10">Priority</h3>
+        <h3 className="text-22 text-gray-300 font-light mt-10">Priority</h3>
         <div className="flex gap-5 mt-5">
           <Buttons
             selectedValues={priority}
             clickedBtn={handlePriorityChange}
           />
         </div>
-        <h3 className="text-lg text-gray-300 font-light mt-10">Complexity</h3>
+        <h3 className="text-22 text-gray-300 font-light mt-10">Complexity</h3>
         <div className="flex gap-5 mt-5">
           <Buttons
             selectedValues={complexity}
@@ -150,14 +151,14 @@ const AddTask = () => {
         </div>
         <div className="flex flex-col gap-8 mt-8">
           <label
-            className="text-lg text-gray-300 font-light"
+            className="text-22 text-gray-300 font-light"
             htmlFor="task-date"
           >
             Due Date:
           </label>
           <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              className="bg-transparent border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
+              className="bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -198,25 +199,31 @@ const AddTask = () => {
                   }}
                   key={index}
                 >
-                  <svg
-                    onClick={() => checkSubTask(subTask.id)}
-                    style={{ color: "white", width: "20px", cursor: "pointer" }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    dataSlot="icon"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
+                  <div className="flex items-center gap-5">
+                    <svg
+                      onClick={() => checkSubTask(subTask.id)}
+                      style={{
+                        color: "white",
+                        width: "20px",
+                        cursor: "pointer",
+                      }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      dataSlot="icon"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
 
-                  {subTask.name}
+                    {subTask.name}
+                  </div>
                   <svg
                     onClick={() => removeSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
