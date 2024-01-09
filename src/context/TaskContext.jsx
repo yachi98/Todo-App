@@ -51,7 +51,7 @@ export const TaskProvider = ({ children }) => {
   };
 
   const removeSubTask = (taskId, subTaskId) => {
-    console.log("hi");
+    console.log("remove");
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
         task.subTasksList = task.subTasksList.filter(

@@ -15,6 +15,7 @@ const EditTask = () => {
   const [dueDate, setDueDate] = useState(task.date);
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState(task.subTasksList || []);
+  const { checkSubTask, removeSubTask } = useTask();
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const navigate = useNavigate();
 
@@ -68,22 +69,6 @@ const EditTask = () => {
 
   const handleDueDateChange = (e) => {
     setDueDate(e.target.value);
-  };
-
-  const checkSubTask = (id) => {
-    const newList = subTasksList.map((element) => {
-      if (element.id === id) {
-        element.isCompleted = !element.isCompleted;
-      }
-      return element;
-    });
-    setSubTasksList(newList);
-  };
-
-  const removeSubTask = (subTaskId) => {
-    const newList = subTasksList.filter((element) => element.id !== subTaskId);
-    console.log(newList);
-    setSubTasksList(newList);
   };
 
   return (
@@ -185,7 +170,7 @@ const EditTask = () => {
                 >
                   <div className="flex items-center gap-5">
                     <svg
-                      onClick={() => checkSubTask(subTask.id)}
+                      onClick={() => checkSubTask(task.id, subTask.id)}
                       style={{
                         color: "white",
                         width: "20px",
@@ -209,7 +194,7 @@ const EditTask = () => {
                     {subTask.name}
                   </div>
                   <svg
-                    onClick={() => removeSubTask(subTask.id)}
+                    onClick={() => removeSubTask(task.id, subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
