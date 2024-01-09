@@ -13,6 +13,7 @@ const EditTask = () => {
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
   const [dueDate, setDueDate] = useState(task.date);
+  const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState(task.subTasksList || []);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const navigate = useNavigate();
@@ -43,6 +44,18 @@ const EditTask = () => {
     }
     updateTask(id, value, priority, complexity);
     navigate("/");
+  };
+
+  const handleAddSubTask = () => {
+    if (subTask.trim() !== "") {
+      const newSubTask = {
+        name: subTask,
+        isCompleted: false,
+        id: uid(),
+      };
+      setSubTasksList([...subTasksList, newSubTask]);
+      setSubTask("");
+    }
   };
 
   const handlePriorityChange = (value) => {
@@ -86,9 +99,11 @@ const EditTask = () => {
       <div>
         <h3 className="text-22 text-gray-300 font-light">Add Task</h3>
         <form className="flex flex-col gap-30" onSubmit={handleSubmit}>
-          <label className="text-22 text-gray-300 font-light">Task name</label>
+          <label className="text-22 text-gray-300 font-light mb-10">
+            Task name
+          </label>
           <input
-            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-3 text-gray-300 font-light rounded-2xl text-base outline-none"
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -126,7 +141,7 @@ const EditTask = () => {
           </label>
           <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              className="bg-transparent border-none p-4 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
+              className="bg-transparent border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -138,24 +153,31 @@ const EditTask = () => {
             </label>
             <div className="flex flex-1">
               <input
-                className="flex-1 max-w-450px bg-blue-400 bg-opacity-10 border-none py-2 px-4 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
+                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
                 ref={inputRef2}
                 onFocus={handleInputFocus2}
                 onBlur={handleInputBlur2}
                 placeholder="Add Task..."
               />
-              <button className="bg-blue-400 bg-opacity-10 text-gray-300 border-none p-2 md:p-4 rounded-2xl text-base md:text-sm font-light cursor-pointer">
+              <button
+                className="bg-blue-400 bg-opacity-10 text-gray-300 border-none p-2 md:p-4 rounded-2xl text-base md:text-sm font-light cursor-pointer"
+                onClick={handleAddSubTask}
+              >
                 Add
               </button>
             </div>
             <ul>
               {subTasksList.map((subTask, index) => (
                 <li
-                  className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-3 text-white flex justify-between"
+                  className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-2 text-white flex justify-between"
                   style={{
                     textDecoration: subTask.isCompleted
                       ? "line-through"
                       : "none",
+
+                    background: subTask.isCompleted
+                      ? "rgb(200,200,200,0.1)"
+                      : "rgb(1,1,1,0.3)",
                   }}
                   key={index}
                 >

@@ -254,8 +254,10 @@ const Home = () => {
               transition={{ duration: 0.3 }}
               key={task.id}
               style={{
-                background: task.completed ? "#1da1f2" : "rgb(1,1,1,0.3)",
-                color: task.completed ? "#000517" : "#E1E1E1",
+                background: task.completed
+                  ? "rgb(200,200,200,0.1)"
+                  : "rgb(1,1,1,0.3)",
+                color: task.completed ? "white" : "#E1E1E1",
               }}
               className="p-4 rounded-2xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
             >

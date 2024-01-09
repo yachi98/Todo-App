@@ -11,6 +11,7 @@ export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
   const [tasks, setTasks] = useState(JSON.parse(storedTasks));
   const [value, searchValue] = useState("");
+  // const task = getTask(id);
   const [sort, setSort] = useState("");
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const TaskProvider = ({ children }) => {
   const completeTask = (id) => {
     const completedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, completed: !task.completed }; // returns a new object
+        return { ...task, completed: !task.completed };
       }
       return task;
     });
@@ -31,6 +32,34 @@ export const TaskProvider = ({ children }) => {
   const addTask = (newTodo) => {
     const newTask = [...tasks, newTodo];
     setTasks(newTask);
+  };
+
+  const checkSubTask = (taskId, subTaskId) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        task.subtasks = task.subtasks.map((subTask) => {
+          if (subTask.id === subTaskId) {
+            subTask.completed = !subTask.completed;
+          }
+          return subTask;
+        });
+      }
+      return task;
+    });
+
+    setTasks(newTasks);
+  };
+
+  const removeSubtask = (taskId, subTaskId) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        task.subtasks = task.subtasks.filter(
+          (subTask) => subTask.id !== subTaskId
+        );
+      }
+      return task;
+    });
+    setTasks(newTasks);
   };
 
   const removeTask = (taskId) => {
@@ -68,6 +97,25 @@ export const TaskProvider = ({ children }) => {
   const getTask = (taskId) => {
     return tasks.find((task) => task.id === taskId);
   };
+
+  // const filterByTags = (subTask) => {
+  //   if (subTask.task.subTasksList.length) {
+  //     if (subTask.subTasksList) {
+  //       return subTask.tags.some((subTask) =>
+  //         filterTags.includes(subTask.title)
+  //       );
+  //     }
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
+  // const filteredTasks = tasks.filter((task) =>
+  //   task.value
+  //     .toLowerCase()
+  //     .includes(value.toLowerCase())
+  //     .filter((element) => filterByTags(element))
+  // );
 
   const filteredTasks = tasks.filter((task) =>
     task.value.toLowerCase().includes(value.toLowerCase())
@@ -122,6 +170,8 @@ export const TaskProvider = ({ children }) => {
         sortTask,
         getTask,
         updateTask,
+        checkSubTask,
+        removeSubtask,
         value,
       }}
     >

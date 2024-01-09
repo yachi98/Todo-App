@@ -8,6 +8,7 @@ const AddTask = () => {
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
   const [value, setValue] = useState("");
+  // const { checkSubTask } = useTask();
   const [complexity, setComplexity] = useState(null);
   const [priority, setPriority] = useState(null);
   const [dueDate, setDueDate] = useState(Date || null);
@@ -96,16 +97,6 @@ const AddTask = () => {
     }
   };
 
-  const checkSubTask = (id) => {
-    const newList = subTasksList.map((element) => {
-      if (element.id === id) {
-        element.isCompleted = !element.isCompleted;
-      }
-      return element;
-    });
-    setSubTasksList(newList);
-  };
-
   const removeSubTask = (subTaskId) => {
     const newList = subTasksList.filter((element) => element.id !== subTaskId);
     setSubTasksList(newList);
@@ -124,9 +115,11 @@ const AddTask = () => {
       <div>
         <h3 className="text-22 text-gray-300 font-light">Add Task</h3>
         <form className="flex flex-col gap-30" onSubmit={handleSubmit}>
-          <label className="text-22 text-gray-300 font-light">Task name</label>
+          <label className="text-22 text-gray-300 font-light mb-10">
+            Task name
+          </label>
           <input
-            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-3 text-gray-300 font-light rounded-2xl text-base outline-none"
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -164,7 +157,7 @@ const AddTask = () => {
           </label>
           <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              className="bg-transparent border-none p-4 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
+              className="bg-transparent border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -176,7 +169,7 @@ const AddTask = () => {
             </label>
             <div className="flex flex-1">
               <input
-                className="flex-1 max-w-450px bg-blue-400 bg-opacity-10 border-none py-2 px-4 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
+                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
                 value={subTask}
                 onChange={handleSubTaskChange}
                 ref={inputRef2}
@@ -194,11 +187,14 @@ const AddTask = () => {
             <ul>
               {subTasksList.map((subTask, index) => (
                 <li
-                  className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-3 text-white flex justify-between"
+                  className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-2 text-white flex justify-between"
                   style={{
                     textDecoration: subTask.isCompleted
                       ? "line-through"
                       : "none",
+                    background: subTask.isCompleted
+                      ? "rgb(200,200,200,0.1)"
+                      : "rgb(1,1,1,0.3)",
                   }}
                   key={index}
                 >
