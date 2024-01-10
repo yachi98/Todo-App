@@ -31,8 +31,6 @@ const EditTask = () => {
     inputRef2.current.style.border = "1px solid #1da1f2";
   };
 
-  console.log(subTasksList);
-
   const handleInputBlur2 = () => {
     inputRef2.current.style.border = "none";
   };
@@ -43,7 +41,7 @@ const EditTask = () => {
       setNoTaskAdded(true);
       return;
     }
-    updateTask(id, value, priority, complexity);
+    updateTask(id, value, priority, complexity, dueDate);
     navigate("/");
   };
 
@@ -51,7 +49,7 @@ const EditTask = () => {
     if (subTask.trim() !== "") {
       const newSubTask = {
         name: subTask,
-        isCompleted: false,
+        completed: false,
         id: uid(),
       };
       setSubTasksList([...subTasksList, newSubTask]);
@@ -90,7 +88,7 @@ const EditTask = () => {
             Task name
           </label>
           <input
-            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none"
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-xl text-sm outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -128,7 +126,7 @@ const EditTask = () => {
           </label>
           <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              className="bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
+              className="bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 rounded-2xl text-sm font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -140,7 +138,7 @@ const EditTask = () => {
             </label>
             <div className="flex flex-1">
               <input
-                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
+                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-sm outline-none mr-4"
                 ref={inputRef2}
                 onFocus={handleInputFocus2}
                 onBlur={handleInputBlur2}
@@ -154,15 +152,13 @@ const EditTask = () => {
               </button>
             </div>
             <ul>
-              {subTasksList.map((subTask, index) => (
+              {task.subTasksList.map((subTask, index) => (
                 <li
                   className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-2 text-white flex justify-between"
                   style={{
-                    textDecoration: subTask.isCompleted
-                      ? "line-through"
-                      : "none",
+                    textDecoration: subTask.completed ? "line-through" : "none",
 
-                    background: subTask.isCompleted
+                    background: subTask.completed
                       ? "rgb(200,200,200,0.1)"
                       : "rgb(1,1,1,0.3)",
                   }}
@@ -215,7 +211,7 @@ const EditTask = () => {
             <div className="mt-4 font-light">
               <Link to="/" style={{ textDecoration: "none" }}>
                 <button
-                  className="text-gray-500 bg-transparent py-2 px-4 rounded-lg border-none cursor-pointer text-lg font-light transition duration-200 ease-in-out"
+                  className="text-gray-500 bg-transparent py-2 px-4 rounded-2xl border-none cursor-pointer text-lg font-light transition duration-200 ease-in-out"
                   onMouseEnter={(e) => {
                     e.target.style.background = "#1da1f2";
                   }}

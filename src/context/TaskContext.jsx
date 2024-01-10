@@ -20,7 +20,7 @@ export const TaskProvider = ({ children }) => {
   const completeTask = (id) => {
     const completedTasks = tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, isCompleted: !task.completed };
+        return { ...task, completed: !task.completed };
       }
       return task;
     });
@@ -38,7 +38,7 @@ export const TaskProvider = ({ children }) => {
       if (task.id === taskId) {
         task.subTasksList = task.subTasksList.map((subTask) => {
           if (subTask.id === subTaskId) {
-            subTask.isCompleted = !subTask.isCompleted;
+            subTask.completed = !subTask.completed;
           }
 
           return subTask;

@@ -59,7 +59,6 @@ const AddTask = () => {
     };
     myContext.addTask(item);
     console.log(item);
-
     setValue("");
     setDueDate("");
     setNoTaskAdded(false);
@@ -88,7 +87,7 @@ const AddTask = () => {
     if (subTask.trim() !== "") {
       const newSubTask = {
         name: subTask,
-        isCompleted: false,
+        completed: false,
         id: uid(),
       };
       setSubTasksList([...subTasksList, newSubTask]);
@@ -120,7 +119,7 @@ const AddTask = () => {
             Task name
           </label>
           <input
-            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none"
+            className="max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-xl text-sm outline-none"
             value={value}
             ref={inputRef}
             onChange={(e) => setValue(e.target.value)}
@@ -158,7 +157,7 @@ const AddTask = () => {
           </label>
           <form className="bg-rgba-29-161-242-10 max-w-550px rounded-10">
             <input
-              className="bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 rounded-2xl text-base font-light outline-none flex justify-between"
+              className="bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 rounded-2xl text-sm font-light outline-none flex justify-between"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -170,7 +169,7 @@ const AddTask = () => {
             </label>
             <div className="flex flex-1">
               <input
-                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-base outline-none mr-4"
+                className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-sm outline-none mr-4"
                 value={subTask}
                 onChange={handleSubTaskChange}
                 ref={inputRef2}
@@ -190,40 +189,14 @@ const AddTask = () => {
                 <li
                   className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-2 text-white flex justify-between"
                   style={{
-                    textDecoration: subTask.isCompleted
-                      ? "line-through"
-                      : "none",
-                    background: subTask.isCompleted
+                    textDecoration: subTask.completed ? "line-through" : "none",
+                    background: subTask.completed
                       ? "rgb(200,200,200,0.1)"
                       : "rgb(1,1,1,0.3)",
                   }}
                   key={index}
                 >
-                  <div className="flex items-center gap-5">
-                    <svg
-                      onClick={() => checkSubTask(subTask.id)}
-                      style={{
-                        color: "white",
-                        width: "20px",
-                        cursor: "pointer",
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      dataSlot="icon"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </svg>
-
-                    {subTask.name}
-                  </div>
+                  <div className="flex items-center gap-5">{subTask.name}</div>
                   <svg
                     onClick={() => removeSubTask(subTask.id)}
                     style={{ color: "white", width: "20px", cursor: "pointer" }}

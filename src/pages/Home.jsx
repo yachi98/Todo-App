@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import SortTask from "../components/SortTask";
 // import HighestValueTask from "../components/HighestValueTask";
+import { useTask } from "../context/TaskContext";
 import { TaskContext } from "../context/TaskContext";
 
 const Home = () => {
   const inputRef = useRef(null);
   const { tasks } = useContext(TaskContext);
-  const { removeTask, completeTask, handleTask } = useContext(TaskContext);
+  const { removeTask, completeTask, handleTask } = useTask();
   const divRef = useRef(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isPowerMode, setIsPowerMode] = useState(false);
@@ -93,7 +94,7 @@ const Home = () => {
     <div className="w-full pl-5">
       <div className="flex">
         <input
-          className="px-4 min-w-[30rem] my-5 rounded-2xl text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-white"
+          className="px-4 min-w-[30rem] my-5 rounded-2xl text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-blue-400"
           placeholder="Search"
           ref={inputRef}
           onChange={handleTask}
@@ -144,11 +145,9 @@ const Home = () => {
             transition={{ duration: 0.3 }}
             key={highestPriorityTask.id}
             style={{
-              background: highestPriorityTask.completed
-                ? "#1da1f2"
-                : "rgb(1,1,1,0.3)",
+              background: "rgb(200,200,200,0.1)",
             }}
-            className="p-4 rounded-2xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
+            className="p-4 rounded-3xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
           >
             <div className="flex justify-between items-center">
               <Link
@@ -158,9 +157,7 @@ const Home = () => {
                 <strong
                   style={{
                     fontWeight: 300,
-                    color: highestPriorityTask.completed
-                      ? "#000517"
-                      : "#E1E1E1",
+                    color: "white",
                     fontSize: "20px",
                     cursor: "pointer",
                   }}
@@ -220,7 +217,7 @@ const Home = () => {
             </div>
             <div
               style={{
-                color: highestPriorityTask.completed ? "#000517" : "#E1E1E1",
+                color: "#E1E1E1",
                 fontWeight: 400,
               }}
             >
@@ -228,7 +225,7 @@ const Home = () => {
             </div>
             <div
               style={{
-                color: highestPriorityTask.completed ? "#000517" : "#E1E1E1",
+                color: "#E1E1E1",
                 fontWeight: 400,
               }}
             >
@@ -236,11 +233,9 @@ const Home = () => {
             </div>
 
             <div
-              className={`font-normal ${ifDueToday(highestPriorityTask.date)}`}
-              style={{
-                fontWeight: highestPriorityTask.completed ? 400 : 300,
-                fontSize: "15px",
-              }}
+              className={`font-normal text-base mt-4 ${ifDueToday(
+                highestPriorityTask.date
+              )}`}
             >
               Due date: {highestPriorityTask.date}
             </div>
@@ -256,9 +251,9 @@ const Home = () => {
                 background: task.completed
                   ? "rgb(200,200,200,0.1)"
                   : "rgb(1,1,1,0.3)",
-                color: task.completed ? "white" : "#E1E1E1",
+                color: "white",
               }}
-              className="p-4 rounded-2xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
+              className="p-4 rounded-3xl backdrop-filter backdrop-blur-md h-48 w-96 flex flex-col gap-4 transition duration-200 ease-out"
             >
               <div className="flex justify-between items-center">
                 <Link
@@ -345,6 +340,7 @@ const Home = () => {
                 style={{
                   fontWeight: task.completed ? 400 : 300,
                   fontSize: "15px",
+                  marginTop: "15px",
                 }}
               >
                 Due date: {task.date}

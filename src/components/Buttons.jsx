@@ -14,9 +14,9 @@ const Buttons = (props) => {
     <>
       {numbers.map((num) => (
         <button
-          className="rounded-2xl border border-transparent bg-opacity-10 cursor-pointer text-gray-400 text-base font-light"
+          className="rounded-xl border border-transparent bg-opacity-10 cursor-pointer text-gray-400 text-sm font-light"
           style={{
-            padding: "8px 16px",
+            padding: "6px 14px",
             background:
               props.selectedValues === num
                 ? "#1da1f2"

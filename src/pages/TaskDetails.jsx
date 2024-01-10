@@ -19,9 +19,7 @@ const TaskDetails = () => {
       return 0;
     }
 
-    const completedCount = subTasksList.filter(
-      (item) => item.isCompleted
-    ).length;
+    const completedCount = subTasksList.filter((item) => item.completed).length;
     const progress = Math.floor((completedCount / subTasksList.length) * 100);
     return progress;
   };
@@ -128,12 +126,12 @@ const TaskDetails = () => {
             Subtask Checklist {task.subValue}
           </span>
         </div>
-        {subTasksList.map((subTask, index) => (
+        {task.subTasksList.map((subTask, index) => (
           <li
             className="list-none bg-blue-400 bg-opacity-10 rounded-2xl mt-3 max-w-450 p-3 text-white flex justify-between"
             style={{
-              textDecoration: subTask.isCompleted ? "line-through" : "none",
-              background: subTask.isCompleted
+              textDecoration: subTask.completed ? "line-through" : "none",
+              background: subTask.completed
                 ? "rgb(200,200,200,0.1)"
                 : "rgb(1,1,1,0.3)",
             }}
