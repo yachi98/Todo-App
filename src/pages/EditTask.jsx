@@ -41,7 +41,7 @@ const EditTask = () => {
       setNoTaskAdded(true);
       return;
     }
-    updateTask(id, value, priority, complexity, dueDate);
+    updateTask(id, value, priority, complexity, dueDate, subTasksList);
     navigate("/");
   };
 
@@ -51,6 +51,7 @@ const EditTask = () => {
         name: subTask,
         completed: false,
         id: uid(),
+        subTasksList: subTasksList,
       };
       setSubTasksList([...subTasksList, newSubTask]);
       setSubTask("");

@@ -3,14 +3,14 @@ import { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import SortTask from "../components/SortTask";
-// import HighestValueTask from "../components/HighestValueTask";
 import { useTask } from "../context/TaskContext";
 import { TaskContext } from "../context/TaskContext";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const inputRef = useRef(null);
   const { tasks } = useContext(TaskContext);
-  const { removeTask, completeTask, handleTask } = useTask();
+  const { removeTask, completeTask, handleTask, ifDueToday } = useTask();
   const divRef = useRef(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isPowerMode, setIsPowerMode] = useState(false);
@@ -32,40 +32,8 @@ const Home = () => {
     setHighestPriority(nextHighestPriorityTask);
   };
 
-  const isToday = (dueDate) => {
-    if (!dueDate) {
-      return false;
-    }
-    const today = new Date();
-    return (
-      dueDate.getDate() === today.getDate() &&
-      dueDate.getMonth() === today.getMonth() &&
-      dueDate.getFullYear() === today.getFullYear()
-    );
-  };
-
-  const ifDueToday = (dueDate) => {
-    if (!dueDate) {
-      return null;
-    }
-
-    const formattedDueDate = new Date(dueDate);
-    const today = new Date();
-    const differenceInTime = formattedDueDate.getTime() - today.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-    if (isToday(formattedDueDate)) {
-      return "text-red-500";
-    } else if (differenceInDays <= 3 && differenceInDays > 0) {
-      return "text-orange-500";
-    } else {
-      return "text-green-500";
-    }
-  };
-
   const handleInputFocus = () => {
     inputRef.current.style.border = "1px solid #1da1f2";
-    inputRef.current.style.outlineOffset = "3px";
   };
 
   const handleInputBlur = () => {
@@ -93,15 +61,12 @@ const Home = () => {
   return (
     <div className="w-full pl-5">
       <div className="flex">
-        <input
-          className="px-4 min-w-[30rem] my-5 rounded-2xl text-sm outline-none bg-black bg-opacity-50 backdrop-blur-10 text-blue-400"
-          placeholder="Search"
-          ref={inputRef}
-          onChange={handleTask}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+        <SearchBar
+          inputRef={inputRef}
+          handleTask={handleTask}
+          handleInputFocus={handleInputFocus}
+          handleInputBlur={handleInputBlur}
         />
-
         <div className="flex">
           <Link
             to="/task/add"

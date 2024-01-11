@@ -38,6 +38,7 @@ export const TaskProvider = ({ children }) => {
       if (task.id === taskId) {
         task.subTasksList = task.subTasksList.map((subTask) => {
           if (subTask.id === subTaskId) {
+            console.log(subTask.name);
             subTask.completed = !subTask.completed;
           }
 
@@ -51,7 +52,6 @@ export const TaskProvider = ({ children }) => {
   };
 
   const removeSubTask = (taskId, subTaskId) => {
-    console.log("remove");
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
         task.subTasksList = task.subTasksList.filter(
@@ -99,17 +99,96 @@ export const TaskProvider = ({ children }) => {
     return tasks.find((task) => task.id === taskId);
   };
 
-  const filteredTasks = tasks.filter((task) =>
-    task.value.toLowerCase().includes(value.toLowerCase())
-  );
-
-  // const filteredTasks = tasks
-  //   .filter((task) => task.value.toLowerCase().includes(value.toLowerCase()))
-  //   .map((task) => {
-  //     const filteredSubtasks = task.subTasksList.filter((subtask) =>
-  //       subtask.name.toLowerCase().includes(value.toLowerCase())
+  // const filterBySub = (task) => {
+  //   if (task.subTasksList.length > 0) {
+  //     const findSubTask = task.subTasksList.filter((subTask) =>
+  //       subTask.name.toLowerCase().includes(value.toLowerCase())
   //     );
-  //   });
+  //     console.log(findSubTask);
+
+  //     return findSubTask;
+  //   }
+  //   return true;
+  // };
+
+  // const filterBySub = (task) => {
+  //   if (task.subTasksList.length > 0) {
+  //     console.log(task.subTasksList, "works");
+  //     return task.subTasksList.filter((subTask) =>
+  //       subTask.name.includes(value.toLowerCase())
+  //     );
+  //   }
+  //   return true;
+  // };
+
+  // const filteredTasks = tasks.filter(
+  //   (task) =>
+  //     task.value.toLowerCase().includes(value.toLowerCase()) &&
+  //     filterBySub(task)
+  // );
+  // const filteredTasks = tasks.filter((task) => {
+  //   if (task.subTasksList.length > 0) {
+  //     console.log(task.subTasksList, "works");
+  //     return task.subTasksList.filter((subTask) =>
+  //       subTask.name.toLowerCase().includes(value.toLowerCase())
+  //     );
+  //   }
+  //   return true;
+  // });
+
+  // const filteredTasks = tasks.filter((task) => {
+  //   const filterTask = task.value.toLowerCase().includes(value.toLowerCase());
+
+  //   if (task.subTasksList.length > 0) {
+  //     const filteredSubTasks = task.subTasksList.some((subTask) =>
+  //       subTask.name.toLowerCase().includes(value.toLowerCase())
+  //     );
+  //     return filteredSubTasks;
+  //   }
+  //   return filterTask;
+  // });
+
+  const filteredTasks = tasks.filter((task) => {
+    const taskValueMatches = task.value
+      .toLowerCase()
+      .includes(value.toLowerCase());
+    const subTaskMatches = task.subTasksList.some((subTask) =>
+      subTask.name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    return subTaskMatches || taskValueMatches;
+  });
+
+  const isToday = (dueDate) => {
+    if (!dueDate) {
+      return false;
+    }
+    const today = new Date();
+    return (
+      dueDate.getDate() === today.getDate() &&
+      dueDate.getMonth() === today.getMonth() &&
+      dueDate.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const ifDueToday = (dueDate) => {
+    if (!dueDate) {
+      return null;
+    }
+
+    const formattedDueDate = new Date(dueDate);
+    const today = new Date();
+    const differenceInTime = formattedDueDate.getTime() - today.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    if (isToday(formattedDueDate)) {
+      return "text-red-500";
+    } else if (differenceInDays <= 3 && differenceInDays > 0) {
+      return "text-orange-500";
+    } else {
+      return "text-green-500";
+    }
+  };
 
   const sortTask = (sortBy) => {
     setSort(sortBy);
@@ -163,6 +242,7 @@ export const TaskProvider = ({ children }) => {
         checkSubTask,
         removeSubTask,
         value,
+        ifDueToday,
       }}
     >
       {children}

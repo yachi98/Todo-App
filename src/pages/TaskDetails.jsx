@@ -69,10 +69,10 @@ const TaskDetails = () => {
           </div>
           <div className="text-white text-3xl mb-8">{value}</div>
           <div className="flex gap-10 mb-10">
-            <h2 className="text-white text-2xl border-none p-3 rounded-2xl bg-blue-400 w-52">
+            <h2 className="text-2xl border-none p-3 rounded-2xl bg-black bg-opacity-30 text-blue-400 w-52">
               Priority: {task.priority}
             </h2>
-            <h2 className="text-black text-2xl border-none p-3 rounded-2xl bg-white w-52">
+            <h2 className="text-white text-2xl border-none p-3 rounded-2xl bg-black bg-opacity-30 w-52">
               Complexity: {task.complexity}
             </h2>
             <Link to={`/task/edit/${task.id}`}>
