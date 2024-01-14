@@ -38,7 +38,6 @@ export const TaskProvider = ({ children }) => {
       if (task.id === taskId) {
         task.subTasksList = task.subTasksList.map((subTask) => {
           if (subTask.id === subTaskId) {
-            console.log(subTask.name);
             subTask.completed = !subTask.completed;
           }
 
@@ -99,64 +98,13 @@ export const TaskProvider = ({ children }) => {
     return tasks.find((task) => task.id === taskId);
   };
 
-  // const filterBySub = (task) => {
-  //   if (task.subTasksList.length > 0) {
-  //     const findSubTask = task.subTasksList.filter((subTask) =>
-  //       subTask.name.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //     console.log(findSubTask);
-
-  //     return findSubTask;
-  //   }
-  //   return true;
-  // };
-
-  // const filterBySub = (task) => {
-  //   if (task.subTasksList.length > 0) {
-  //     console.log(task.subTasksList, "works");
-  //     return task.subTasksList.filter((subTask) =>
-  //       subTask.name.includes(value.toLowerCase())
-  //     );
-  //   }
-  //   return true;
-  // };
-
-  // const filteredTasks = tasks.filter(
-  //   (task) =>
-  //     task.value.toLowerCase().includes(value.toLowerCase()) &&
-  //     filterBySub(task)
-  // );
-  // const filteredTasks = tasks.filter((task) => {
-  //   if (task.subTasksList.length > 0) {
-  //     console.log(task.subTasksList, "works");
-  //     return task.subTasksList.filter((subTask) =>
-  //       subTask.name.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //   }
-  //   return true;
-  // });
-
-  // const filteredTasks = tasks.filter((task) => {
-  //   const filterTask = task.value.toLowerCase().includes(value.toLowerCase());
-
-  //   if (task.subTasksList.length > 0) {
-  //     const filteredSubTasks = task.subTasksList.some((subTask) =>
-  //       subTask.name.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //     return filteredSubTasks;
-  //   }
-  //   return filterTask;
-  // });
-
   const filteredTasks = tasks.filter((task) => {
-    const taskValueMatches = task.value
-      .toLowerCase()
-      .includes(value.toLowerCase());
-    const subTaskMatches = task.subTasksList.some((subTask) =>
-      subTask.name.toLowerCase().includes(value.toLowerCase())
+    const filterTask = task.value.includes(value.toLowerCase());
+    const filterSubTask = task.subTasksList.find((subTask) =>
+      subTask.name.includes(value.toLowerCase())
     );
 
-    return subTaskMatches || taskValueMatches;
+    return filterTask || filterSubTask;
   });
 
   const isToday = (dueDate) => {

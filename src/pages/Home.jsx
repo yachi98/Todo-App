@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   const handleInputFocus = () => {
-    inputRef.current.style.border = "1px solid #1da1f2";
+    inputRef.current.style.border = "1px solid white";
   };
 
   const handleInputBlur = () => {
