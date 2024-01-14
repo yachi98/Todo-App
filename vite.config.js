@@ -23,7 +23,7 @@ export default defineConfig({
 
   build: {
     rollupOptions: {
-      external: [/^node:.*/],
+      external: [/node_modules/],
     },
   },
 });
