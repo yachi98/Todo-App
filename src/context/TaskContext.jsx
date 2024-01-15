@@ -9,7 +9,7 @@ export function useTask() {
 
 export const TaskProvider = ({ children }) => {
   const storedTasks = localStorage.getItem("tasks");
-  const [tasks, setTasks] = useState(JSON.parse(storedTasks));
+  const [tasks, setTasks] = useState(JSON.parse(storedTasks) || []);
   const [value, searchValue] = useState("");
   const [sort, setSort] = useState("");
 
