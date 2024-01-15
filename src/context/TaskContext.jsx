@@ -109,7 +109,7 @@ export const TaskProvider = ({ children }) => {
 
   const isToday = (dueDate) => {
     if (!dueDate) {
-      return false;
+      return null;
     }
     const today = new Date();
     return (

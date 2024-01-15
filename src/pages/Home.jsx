@@ -299,17 +299,18 @@ const Home = () => {
               >
                 Complexity: {task.complexity}
               </div>
-
-              <div
-                className={`font-normal ${ifDueToday(task.date)}`}
-                style={{
-                  fontWeight: task.completed ? 400 : 300,
-                  fontSize: "15px",
-                  marginTop: "15px",
-                }}
-              >
-                Due date: {task.date}
-              </div>
+              {task.date && (
+                <div
+                  className={`font-normal ${ifDueToday(task.date)}`}
+                  style={{
+                    fontWeight: 300,
+                    fontSize: "15px",
+                    marginTop: "15px",
+                  }}
+                >
+                  Due date: {task.date}
+                </div>
+              )}
             </motion.li>
           ))
         )}

@@ -12,7 +12,7 @@ const EditTask = () => {
   const [value, setValue] = useState(task.value);
   const [priority, setPriority] = useState(task.priority);
   const [complexity, setComplexity] = useState(task.complexity);
-  const [dueDate, setDueDate] = useState(task.date);
+  const [dueDate, setDueDate] = useState(task.date || null);
   const [subTask, setSubTask] = useState("");
   const [subTasksList, setSubTasksList] = useState(task.subTasksList || []);
   const { checkSubTask, removeSubTask } = useTask();
@@ -104,7 +104,7 @@ const EditTask = () => {
           </div>
         )}
 
-        <h3 lassName="text-22 text-gray-300 font-light mt-10">Priority</h3>
+        <h3 className="text-22 text-gray-300 font-light mt-10">Priority</h3>
         <div className="flex gap-5 mt-5">
           <Buttons
             selectedValues={priority}
