@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Buttons from "../components/Buttons";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { uid } from "uid";
 import { useTask } from "../context/TaskContext";
 
 const EditTask = () => {
@@ -35,6 +36,10 @@ const EditTask = () => {
     inputRef2.current.style.border = "none";
   };
 
+  const handleSubTaskChange = (e) => {
+    setSubTask(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.trim() === "") {
@@ -51,11 +56,10 @@ const EditTask = () => {
         name: subTask,
         completed: false,
         id: uid(),
-        subTasksList: subTasksList,
       };
-      setSubTasksList([...subTasksList, newSubTask]);
-      setSubTask("");
+      subTasksList.push(newSubTask);
     }
+    setSubTask("");
   };
 
   const handlePriorityChange = (value) => {
@@ -142,8 +146,10 @@ const EditTask = () => {
                 className="flex-1 max-w-550px bg-blue-400 bg-opacity-10 border-none p-2 text-gray-300 font-light rounded-2xl text-sm outline-none mr-4"
                 ref={inputRef2}
                 onFocus={handleInputFocus2}
+                onChange={handleSubTaskChange}
                 onBlur={handleInputBlur2}
-                placeholder="Add Task..."
+                placeholder="Add Sub Task..."
+                value={subTask}
               />
               <button
                 className="bg-blue-400 bg-opacity-10 text-gray-300 border-none p-2 md:p-4 rounded-2xl text-base md:text-sm font-light cursor-pointer"

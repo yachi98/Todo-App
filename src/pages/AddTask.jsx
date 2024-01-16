@@ -10,7 +10,7 @@ const AddTask = () => {
   const [value, setValue] = useState("");
   const [complexity, setComplexity] = useState(null);
   const [priority, setPriority] = useState(null);
-  const [dueDate, setDueDate] = useState(Date || null);
+  const [dueDate, setDueDate] = useState(null);
   const [noTaskAdded, setNoTaskAdded] = useState(false);
   const myContext = useTask();
   const [subTask, setSubTask] = useState("");

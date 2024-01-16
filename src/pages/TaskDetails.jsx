@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTask } from "../context/TaskContext";
-
 import { motion } from "framer-motion";
 import React from "react";
 
@@ -112,16 +111,18 @@ const TaskDetails = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          <span
-            className={`font-normal bg-black bg-opacity-50 p-5 rounded-2xl mb-10 ${ifDueToday(
-              task.date
-            )}`}
-            style={{
-              fontSize: "25px",
-            }}
-          >
-            Due date: {task.date}
-          </span>
+          {task.date && (
+            <span
+              className={`font-normal bg-black bg-opacity-50 p-5 rounded-2xl mb-10 ${ifDueToday(
+                task.date
+              )}`}
+              style={{
+                fontSize: "25px",
+              }}
+            >
+              Due date: {task.date}
+            </span>
+          )}
           <span className="text-white text-2xl mb-8">
             Subtask Checklist {task.subValue}
           </span>
