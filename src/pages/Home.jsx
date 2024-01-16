@@ -196,14 +196,15 @@ const Home = () => {
             >
               Complexity: {highestPriorityTask.complexity}
             </div>
-
-            <div
-              className={`font-normal text-base mt-4 ${ifDueToday(
-                highestPriorityTask.date
-              )}`}
-            >
-              Due date: {highestPriorityTask.date}
-            </div>
+            {highestPriorityTask.date && (
+              <div
+                className={`font-normal text-base mt-4 ${ifDueToday(
+                  highestPriorityTask.date
+                )}`}
+              >
+                Due date: {highestPriorityTask.date}
+              </div>
+            )}
           </motion.li>
         ) : (
           tasks.map((task) => (
